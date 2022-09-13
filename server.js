@@ -6,25 +6,33 @@ import cors from 'cors'
 
 
 dotenv.config();
+
+const corsConfig = {
+    origin: [
+        'http://localhost:3000',
+        'http://localhost:5000'
+    ]
+}
 const app = express();
 
 //routers
-import catsRoutes from './routes/catsRoutes.js'
+import bunniesRoutes from './routes/bunniesRoutes.js'
 
 //db
 import connectDB from "./db/connect.js";
 
-app.use(cors());
-app.use(express.json());
+app.use(cors(), express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
     res.send('Connected To Express!');
-})
+});
+
+app.get(cors(corsConfig));
 
 const port = process.env.PORT || 5000;
 
-app.use('/api/v1/cats', catsRoutes);
+app.use('/api/v1/bunnies', bunniesRoutes);
 
 //mongoose
 const start = async () => {

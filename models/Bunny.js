@@ -4,14 +4,18 @@ let Schema = mongoose.Schema;
 
 let bunnySchema = new Schema(
     {
-        catName: {
+        bunnyName: {
             type: String,
-            required: [true, 'Please provide cat name'],
+            required: [true, 'Please provide bunny name'],
+            trim: true,
+        },
+        description: {
+            type: String,
             trim: true,
         },
         temperament: {
             type: String,
-            required: [true, 'Please describe cat for potential adopters.'],
+            trim: true,
         },
        age: {
             type: String,

@@ -3,32 +3,26 @@ import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
 import FormHeaders from './FormHeaders.jsx'
 import FormFieldText from './FormFieldText'
-import FormFieldAge from './FormFieldAge'
 import FormFieldToggles from './FormFieldToggles'
 
-const EditCatForm = () => {
 
-    const { catToEdit, editCat, form } = useAppContext();
-    const { _id, catName, description, monthsOld, yearsOld, xdoor, fixed, available } = catToEdit;
-
+const AddBunnyForm = () => {
+    const { form, addBunny } = useAppContext();
 
 	const handleSubmit = (e) => {
-        e.preventDefault();
-       
+		e.preventDefault();
         const formData = {
             ...form
         }
-
-        editCat(_id, formData);
+        addBunny(formData);
 	}
 	
 	return (
 		<FormStyles>
-			<form className='addCatForm column' onSubmit={(e) => { handleSubmit(e) }}>
-                <FormHeaders formType='edit' />
-                <FormFieldText catName={catName} description={description} />
-                <FormFieldAge yearsOld={yearsOld} monthsOld={monthsOld} />
-                <FormFieldToggles xdoor={xdoor} fixed={fixed} available={available} />
+			<form className='column' onSubmit={(e) => { handleSubmit(e) }}>
+				<FormHeaders formType='add'/>
+				<FormFieldText />
+                <FormFieldToggles />
 				<button type='submit' className='submitButton'>SUBMIT</button>
 			</form> 
 
@@ -73,4 +67,4 @@ const FormStyles = styled.div`
 	}
 `
 
-export default EditCatForm
+export default AddBunnyForm

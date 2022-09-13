@@ -1,24 +1,22 @@
-import AddCatForm from './components/AddCatForm';
-import EditCatForm from './components/EditCatForm';
+import BunnyForm from './components/BunnyForm';
 import { useAppContext } from './context/appContext';
 import styled from 'styled-components'
-import CatsContainer from './components/CatsContainer';
+import BunniesContainer from './components/BunniesContainer';
 
 function App() {
-    const { showAddForm, showEditForm, toggleShowForm, catToEdit } = useAppContext();  
+    const { showForm, formType, toggleShowForm, bunnyToEdit } = useAppContext();  
     return (
         <AppStyles className='App'>
-            {showAddForm && <AddCatForm/>}
-            {showEditForm && <EditCatForm catToEdit={catToEdit} />}
-            {showEditForm || showAddForm
-                ? <></>
-                : <div className='column container'>
-                    <button className='showFormButton' type='button' onClick={() => {toggleShowForm('add')}}>
-                        add a cat
-                    </button>
-                    <CatsContainer />
-                  </div>
-            }
+        {showForm 
+            ? <BunnyForm />
+            :
+            <div className='column container'>
+                <button className='showFormButton' type='button' onClick={() => {toggleShowForm('add')}}>
+                    add a bunny
+                </button>
+                <BunniesContainer />
+            </div>
+        } 
            
         </AppStyles>
     );

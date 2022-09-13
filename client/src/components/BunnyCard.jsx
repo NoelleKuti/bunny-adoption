@@ -4,54 +4,43 @@ import { useAppContext } from '../context/appContext';
 import { MdDeleteOutline, MdOutlineModeEdit } from 'react-icons/md'
 
 
-const CatCard = (data) => {
-    const { objectId, catData } = data;
-    const { catName, description, yearsOld, monthsOld, xdoor, fixed, available, createdAt, updatedAt } = catData;
+const BunnyCard = (data) => {
+    const { objectId, bunnyData } = data;
+    const { bunnyName, description, temperament, age, variation } = bunnyData;
  
-    const { deleteCat, chooseCatToEdit } = useAppContext();
-    const timeStamps = {
-        created: new Date(createdAt).
-            toLocaleString("en-US", {
-                localeMatcher: "best fit",
-                timeZoneName: "short"
-            }),
-        updated: new Date(updatedAt).
-            toLocaleString("en-US", {
-                localeMatcher: "best fit",
-                timeZoneName: "short"
-            })
-    }
+    const { deleteBunny, chooseBunnyToEdit } = useAppContext();
+    
 
     return (
         <CardStyles className='column'>
             <div className='card'>
                 <div className='cardHeader row'>
-                    <h2>{catName}</h2>
+                    <h2>{bunnyName}</h2>
                     <div className='buttonContainer row'>
                         <MdOutlineModeEdit
                         as='button'
                         className='button'
                             onClick={() => {
-                                chooseCatToEdit(objectId, catData);
+                                chooseBunnyToEdit(objectId, bunnyData);
                             }} />
                            
                         <MdDeleteOutline
-                        as='button' className='button' onClick={() => window.confirm(`You are about to delete ${catName}. Are you sure?`) && deleteCat(objectId)}/>
+                        as='button' className='button' onClick={() => window.confirm(`You are about to delete ${bunnyName}. Are you sure?`) && deleteBunny(objectId)}/>
                     </div>
                 </div>
                 <div className='cardText'>
-                    <p>{description}</p>
-                    <p>Age:
-                        {(yearsOld === 0 && monthsOld === 0)
-                            ? ' unknown'
-                            : ` ${yearsOld} years, ${monthsOld} months.`}
+                    <p>
+                        Description: {description}
                     </p>
-                    <p>{catName} <span>{fixed ? 'is fixed' : 'is not fixed'}</span> and is an <span>{xdoor}</span> cat.</p>
-                    <p>{catName} <span>{available ? 'is' : 'is not'}</span> currently available for adoption.</p>
-                </div>
-                <div className='column timeStamps'>
-                    <p>Added: {timeStamps.created}</p>
-                    <p>Last Updated: {timeStamps.updated}</p>
+                    <p>
+                        Temperament: {temperament}
+                    </p>
+                    <p>
+                        Age: {age} 
+                    </p>
+                    <p>
+                        Variation: {variation}
+                    </p>
                 </div>
             </div>
         </CardStyles>
@@ -119,4 +108,4 @@ const CardStyles = styled.div`
 
 
 `
-export default CatCard
+export default BunnyCard

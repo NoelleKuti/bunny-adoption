@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
-import CatCard from './CatCard'
+import BunnyCard from './BunnyCard'
 
-const CatsContainer = () => {
-    const { fetchCats, catsData } = useAppContext();
+const BunniesContainer = () => {
+    const { fetchBunnies, bunniesData } = useAppContext();
 
     useEffect(() => {
-        fetchCats();
-    }, []);
+        fetchBunnies()
+    }, [bunniesData]);
     
     
     
         return (
       <ContainerStyles>
-           {catsData.map((item) => {
-                return <CatCard key={'k'+item._id} objectId={item._id.toString()} catData={item}/>
+           {bunniesData.map((item) => {
+                return <BunnyCard key={'k'+item._id} objectId={item._id.toString()} bunnyData={item}/>
             })} 
       </ContainerStyles>
   )
@@ -27,4 +27,4 @@ const ContainerStyles = styled.div`
     justify-content: space-evenly;
     padding: 1rem;
 `
-export default CatsContainer
+export default BunniesContainer

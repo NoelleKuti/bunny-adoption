@@ -1,4 +1,4 @@
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_CATS, CHOOSE_CAT_TO_EDIT } from "./appActions";
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT } from "./appActions";
 import { initialState } from "./appContext";
 
 const reducer = (state, action) => {
@@ -6,16 +6,13 @@ const reducer = (state, action) => {
         case TOGGLE_ADD_FORM:
             return {
                 ...initialState,
-                showAddForm: (!state.showAddForm),
+                showForm: (!state.showForm),
             }
         case TOGGLE_EDIT_FORM:
-            if (state.showEditForm === true) {
-                return { ...initialState, showEditForm: (!state.showEditForm)}
-            } else {
-                return {
-                    ...state,
-                    showEditForm: (!state.showEditForm)
-                }
+            return {
+                ...state,
+                showForm: (!state.showForm),
+                form: state.bunnyToEdit,
             }
         case CLEAR_FORM:
             return {
@@ -70,28 +67,25 @@ const reducer = (state, action) => {
                     [fieldName]: value
                 }
             }
-        case VIEW_CATS:
+        case VIEW_BUNNIES:
             const data = action.payload;
             return {
                 ...state,
-                catsData: data
+                bunniesData: data
             }
-        case CHOOSE_CAT_TO_EDIT:
-            const {catName, description, yearsOld, monthsOld, fixed, available, xdoor} = action.payload
+        case CHOOSE_BUNNY_TO_EDIT:
+            const {bunnyName, description, temperament, age, variation} = action.payload
             console.log(action.payload);
             return {
                 ...state,
                 form: {
-                    catName: catName,
-                    description: description,
-                    yearsOld: yearsOld,
-                    monthsOld: monthsOld,
-                    fixed: fixed,
-                    available: available,
-                    xdoor: xdoor,
-                    charsRemaining: 500-description.length
+                    bunnyName : bunnyName,
+                    description : description,
+                    temperament : temperament,
+                    age : age,
+                    variation : variation,
                 },
-                catToEdit: {...action.payload}
+                bunnyToEdit: {...action.payload}
             }
     }
 }

@@ -1,25 +1,22 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import reducer from './appReducer';
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_CATS, CHOOSE_CAT_TO_EDIT } from './appActions';
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT } from './appActions';
 import axios from 'axios'
 
 const initialState = {
-    showAddForm: false,
-    showEditForm: false,
+    showForm: false,
+    formType: '',
     form: {
-        catName: '',
+        bunnyName: '',
         description: '',
-        charsRemaining: 500,
-        yearsOld: 0,
-        monthsOld: 0,
-        xdoor: 'Indoor/Outdoor',
-        fixed: false,
-        available: true,
+        temperament: '',
+        age: '',
+        variation: ''
     },
     showError: false,
     errorText: '',
-    catsData: [],
-    catToEdit: {}
+    bunniesData: [],
+    bunnyToEdit: {}
 }
 
 const AppContext = createContext(initialState);
@@ -51,18 +48,18 @@ const AppProvider = ({ children }) => {
         })
     }
 
-    const fetchCats = () => {
-        axios.get('http://localhost:5000/api/v1/cats', { crossdomain: true })
+    const fetchBunnies = () => {
+        axios.get('http://localhost:5000/api/v1/bunnies', { crossdomain: true })
             .then((response) => {
                 dispatch({
-                    type: VIEW_CATS,
+                    type: VIEW_BUNNIES,
                     payload: response.data,
                 })
             })
     }
 
-    const addCat = (formData) => {
-        axios.post('http://localhost:5000/api/v1/cats', {...formData})
+    const addBunny = (formData) => {
+        axios.post('http://localhost:5000/api/v1/bunnies', {...formData})
             .then((response) => {
                 console.log(response.data);
             })
@@ -71,25 +68,25 @@ const AppProvider = ({ children }) => {
             })
     }
 
-    const deleteCat = (objectId) => {
-        axios.delete('http://localhost:5000/api/v1/cats/' + objectId)
+    const deleteBunny = (objectId) => {
+        axios.delete('http://localhost:5000/api/v1/bunnies/' + objectId)
             .then(() => {
-                fetchCats();
+                fetchBunnies();
             })
     }
 
-    const chooseCatToEdit = (objectId, data) => {
+    const chooseBunnyToEdit = (objectId, data) => {
         toggleShowForm('edit');
-        dispatch({ type: CHOOSE_CAT_TO_EDIT, payload: data })
+        dispatch({ type: CHOOSE_BUNNY_TO_EDIT, payload: data })
     }
 
-    const editCat = (objectId, data) => {
+    const editBunny = (objectId, data) => {
         console.log(objectId);
-        axios.patch('http://localhost:5000/api/v1/cats/' + objectId, data)
+        axios.patch('http://localhost:5000/api/v1/bunnies/' + objectId, data)
             .then((response) => {
                 dispatch({type: TOGGLE_EDIT_FORM})
                 console.log('this one!', response.data);
-                fetchCats();
+                fetchBunnies();
             })
     }
     return (
@@ -100,11 +97,11 @@ const AppProvider = ({ children }) => {
                 clearForm,
                 handleTextInput,
                 handleAgeChange,
-                fetchCats,
-                deleteCat,
-                addCat,
-                editCat,
-                chooseCatToEdit,
+                fetchBunnies,
+                deleteBunny,
+                addBunny,
+                editBunny,
+                chooseBunnyToEdit,
             }}>
             {children}
         </AppContext.Provider>

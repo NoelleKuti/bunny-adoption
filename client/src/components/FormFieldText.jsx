@@ -4,27 +4,25 @@ import { useAppContext } from '../context/appContext'
 
 const FormFieldText = () => {
     const { handleTextInput, form } = useAppContext();
-    const { catName, description, charsRemaining } = form;
+    const { bunnyName, description } = form;
     
     return (
       <TextFieldStyles>
         <div className='column formField'>
-            <label htmlFor='catName'>
+            <label htmlFor='bunnyName'>
                 name:
             </label>
-                <input className='textInput' type='text' name='catName' placeholder="Add Cat's Name" onChange={(e) => { handleTextInput(e) }} defaultValue={catName && catName} />
+                <input className='textInput' type='text' name='bunnyName' placeholder="Add Bunny's Name" onChange={(e) => { handleTextInput(e) }} defaultValue={bunnyName} />
             <div className='row helperText'>
                 <p>*required</p>
             </div>
         </div>
         <div className='column formField'>
             <label htmlFor='description'>
-                description (500 characters or less...):
+                description::
             </label>
-                <textarea rows='8' className='textInput' name='description' placeholder="Add Description Of Cat" onChange={(e) => { handleTextInput(e) }} defaultValue={description !== undefined && description} />
+                <textarea rows='8' className='textInput' name='description' placeholder="Add Description Of Bunny" onChange={(e) => { handleTextInput(e) }} defaultValue={description !== undefined && description} />
             <div className=' row helperText'>
-                <p>*required</p>
-                <p className={charsRemaining < 0 ? "danger" : "success"}>{charsRemaining} characters left...</p>
             </div>
         </div>
     </TextFieldStyles>
