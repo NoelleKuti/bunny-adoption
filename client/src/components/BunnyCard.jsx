@@ -4,9 +4,9 @@ import { useAppContext } from '../context/appContext';
 import { MdDeleteOutline, MdOutlineModeEdit } from 'react-icons/md'
 
 
-const BunnyCard = (data) => {
-    const { objectId, bunnyData } = data;
-    const { bunnyName, description, temperament, age, variation } = bunnyData;
+const BunnyCard = (props) => {
+    const { objectId, bunnyData } = props;
+    const { bunnyName, description, temperament, age, variation, imageLink } = bunnyData;
  
     const { deleteBunny, chooseBunnyToEdit } = useAppContext();
     
@@ -21,7 +21,7 @@ const BunnyCard = (data) => {
                         as='button'
                         className='button'
                             onClick={() => {
-                                chooseBunnyToEdit(objectId, data);
+                                chooseBunnyToEdit(objectId, bunnyData);
                             }} />
                            
                         <MdDeleteOutline
@@ -42,6 +42,7 @@ const BunnyCard = (data) => {
                         Variation: {variation}
                     </p>
                 </div>
+                <image src={imageLink} alt='bunny' />
             </div>
         </CardStyles>
     )

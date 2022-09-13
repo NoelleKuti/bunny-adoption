@@ -78,7 +78,7 @@ const AppProvider = ({ children }) => {
 
     const chooseBunnyToEdit = (objectId, data) => {
         toggleShowForm('edit');
-        dispatch({ type: CHOOSE_BUNNY_TO_EDIT, payload: {objectId : objectId, data: data.bunnyData  }})
+        dispatch({ type: CHOOSE_BUNNY_TO_EDIT, payload: {... data}})
     }
 
     const editBunny = (objectId, data) => {

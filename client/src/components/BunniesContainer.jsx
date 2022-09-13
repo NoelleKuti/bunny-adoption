@@ -15,7 +15,11 @@ const BunniesContainer = () => {
         return (
       <ContainerStyles>
            {bunniesData.map((item) => {
-                return <BunnyCard key={'k'+item._id} objectId={item._id.toString()} bunnyData={item}/>
+                return (
+                    <BunnyCard 
+                        key={'k'+item._id} objectId={item._id.toString()} 
+                        bunnyData={item}/>
+                )
             })} 
       </ContainerStyles>
   )

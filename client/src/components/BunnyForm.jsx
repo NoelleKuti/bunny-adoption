@@ -15,7 +15,7 @@ const BunnyForm = () => {
 		if (formType === 'add') {
         	addBunny(formData);
 		} else if (formType === 'edit') {
-			editBunny(bunnyToEdit.data._id, formData);
+			editBunny(bunnyToEdit._id, formData);
 		} else {
 			console.log(`there was an error with ${formType}`)
 		}

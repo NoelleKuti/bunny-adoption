@@ -46,7 +46,7 @@ const reducer = (state, action) => {
                 bunniesData: data
             }
         case CHOOSE_BUNNY_TO_EDIT:
-            const { bunnyName, description, temperament, age, variation, imageLink } = action.payload.data;
+            const { bunnyName, description, temperament, age, variation, imageLink } = action.payload;
             return {
                 ...state,
                 form: {

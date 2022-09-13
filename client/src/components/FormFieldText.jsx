@@ -4,8 +4,9 @@ import { useAppContext } from '../context/appContext'
 
 const FormFieldText = () => {
     const { handleTextInput, bunnyToEdit } = useAppContext();
-    const { bunnyName, description, temperament, age, variation, imageLink } = bunnyToEdit.data;
+    const { bunnyName, description, temperament, age, variation, imageLink } = bunnyToEdit;
     
+
 
     return (
       <TextFieldStyles>
