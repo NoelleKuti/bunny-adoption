@@ -7,12 +7,14 @@ const reducer = (state, action) => {
             return {
                 ...initialState,
                 showForm: (!state.showForm),
+                formType: 'add',
             }
         case TOGGLE_EDIT_FORM:
             return {
                 ...state,
                 showForm: (!state.showForm),
                 form: state.bunnyToEdit,
+                formType: 'edit'
             }
         case CLEAR_FORM:
             return {
@@ -30,41 +32,11 @@ const reducer = (state, action) => {
             }
         case HANDLE_TEXT_INPUT:
             const e = action.payload;
-            if (e.target.name === 'description') {
-                return {
-                    ...state,
-                    form: {
-                        ...state.form,
-                        charsRemaining: 500 - e.target.value.length,
-                        [e.target.name]: e.target.value,
-                    }
-                }
-            } else if (e.target.name === 'fixed' || e.target.name === 'available') {
-                const newBoolean = (e.target.value === 'true');
-                return {
-                    ...state,
-                    form: {
-                        ...state.form,
-                        [e.target.name]: newBoolean,
-                    } 
-                }
-            } else {
-                    return {
-                        ...state,
-                        form: {
-                            ...state.form,
-                            [e.target.name]: e.target.value
-                        }
-                    }
-                }
-            
-        case HANDLE_AGE_CHANGE:
-            const { fieldName, value } = action.payload
             return {
                 ...state,
-                form: {
+                form : {
                     ...state.form,
-                    [fieldName]: value
+                    [e.target.name] : e.target.value,
                 }
             }
         case VIEW_BUNNIES:
@@ -74,8 +46,7 @@ const reducer = (state, action) => {
                 bunniesData: data
             }
         case CHOOSE_BUNNY_TO_EDIT:
-            const {bunnyName, description, temperament, age, variation} = action.payload
-            console.log(action.payload);
+            const { bunnyName, description, temperament, age, variation, imageLink } = action.payload.data;
             return {
                 ...state,
                 form: {
@@ -84,6 +55,7 @@ const reducer = (state, action) => {
                     temperament : temperament,
                     age : age,
                     variation : variation,
+                    imageLink : imageLink
                 },
                 bunnyToEdit: {...action.payload}
             }

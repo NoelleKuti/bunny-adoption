@@ -3,26 +3,28 @@ import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
 import FormHeaders from './FormHeaders.jsx'
 import FormFieldText from './FormFieldText'
-import FormFieldToggles from './FormFieldToggles'
 
 
-const AddBunnyForm = () => {
-    const { form, addBunny } = useAppContext();
+const BunnyForm = () => {
+    const { formType, form, addBunny, editBunny, bunnyToEdit } = useAppContext();
 
 	const handleSubmit = (e) => {
+		const formData = { ...form }
 		e.preventDefault();
-        const formData = {
-            ...form
-        }
-        addBunny(formData);
+        
+		if (formType === 'add') {
+        	addBunny(formData);
+		} else if (formType === 'edit') {
+			editBunny(bunnyToEdit.data._id, formData);
+		} else {
+			console.log(`there was an error with ${formType}`)
+		}
 	}
-	
 	return (
 		<FormStyles>
-			<form className='column' onSubmit={(e) => { handleSubmit(e) }}>
-				<FormHeaders formType='add'/>
+			<form className='column bunnyForm' onSubmit={(e) => { handleSubmit(e) }}>
+				<FormHeaders/>
 				<FormFieldText />
-                <FormFieldToggles />
 				<button type='submit' className='submitButton'>SUBMIT</button>
 			</form> 
 
@@ -34,7 +36,7 @@ const FormStyles = styled.div`
 	margin: 0px auto;
 	width: 100%;
 
-	.addCatForm {
+	.bunnyForm {
 		width: 80%;
 		max-width: 600px;
 		margin: 4rem auto;
@@ -44,6 +46,7 @@ const FormStyles = styled.div`
 
 	.formField {
 		width: 80%;
+		max-width: 500px;
 		padding: 1.5rem;
 		background-color: var(--50);
 		margin: 10px auto;
@@ -67,4 +70,4 @@ const FormStyles = styled.div`
 	}
 `
 
-export default AddBunnyForm
+export default BunnyForm

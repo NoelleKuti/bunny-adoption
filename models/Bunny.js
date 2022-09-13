@@ -23,6 +23,9 @@ let bunnySchema = new Schema(
         variation: {
             type: String,
         },
+        imageLink: {
+            type: String,
+        }
     },
 );
 

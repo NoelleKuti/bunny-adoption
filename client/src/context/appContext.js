@@ -11,7 +11,8 @@ const initialState = {
         description: '',
         temperament: '',
         age: '',
-        variation: ''
+        variation: '',
+        imageLink: '',
     },
     showError: false,
     errorText: '',
@@ -77,10 +78,11 @@ const AppProvider = ({ children }) => {
 
     const chooseBunnyToEdit = (objectId, data) => {
         toggleShowForm('edit');
-        dispatch({ type: CHOOSE_BUNNY_TO_EDIT, payload: data })
+        dispatch({ type: CHOOSE_BUNNY_TO_EDIT, payload: {objectId : objectId, data: data.bunnyData  }})
     }
 
     const editBunny = (objectId, data) => {
+        
         console.log(objectId);
         axios.patch('http://localhost:5000/api/v1/bunnies/' + objectId, data)
             .then((response) => {
@@ -88,6 +90,7 @@ const AppProvider = ({ children }) => {
                 console.log('this one!', response.data);
                 fetchBunnies();
             })
+            .then(() => fetchBunnies());
     }
     return (
         <AppContext.Provider
