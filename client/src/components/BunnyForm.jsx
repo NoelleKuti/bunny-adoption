@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
-import FormHeaders from './FormHeaders.jsx'
-import FormFieldText from './FormFieldText'
+import BunnyFormHeaders from './BunnyFormHeaders.jsx'
+import BunnyFormField from './BunnyFormField'
 
 
 const BunnyForm = () => {
@@ -23,8 +23,8 @@ const BunnyForm = () => {
 	return (
 		<FormStyles>
 			<form className='column bunnyForm' onSubmit={(e) => { handleSubmit(e) }}>
-				<FormHeaders/>
-				<FormFieldText />
+				<BunnyFormHeaders/>
+				<BunnyFormField />
 				<button type='submit' className='submitButton'>SUBMIT</button>
 			</form> 
 

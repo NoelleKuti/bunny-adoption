@@ -29,7 +29,6 @@ let bunnySchema = new Schema(
     },
 );
 
-    //catSchema.set('collection', 'code-challenge')
 let Bunny = mongoose.model("Bunny", bunnySchema);
 
 Bunny.schema.pre("findOneAndUpdate", function (next) { this.updateAt = new Date(); next(); })

@@ -57,7 +57,10 @@ const reducer = (state, action) => {
                     variation : variation,
                     imageLink : imageLink
                 },
-                bunnyToEdit: {...action.payload}
+                bunnyToEdit: {...action.payload},
+                adoptionForm: {
+                    
+                }
             }
     }
 }
