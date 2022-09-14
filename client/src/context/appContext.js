@@ -76,7 +76,7 @@ const AppProvider = ({ children }) => {
             })
     }
 
-    const chooseBunnyToEdit = (objectId, data) => {
+    const chooseBunnyToEdit = (data) => {
         toggleShowForm('edit');
         dispatch({ type: CHOOSE_BUNNY_TO_EDIT, payload: {... data}})
     }
@@ -87,7 +87,6 @@ const AppProvider = ({ children }) => {
         axios.patch('http://localhost:5000/api/v1/bunnies/' + objectId, data)
             .then((response) => {
                 dispatch({type: TOGGLE_EDIT_FORM})
-                console.log('this one!', response.data);
                 fetchBunnies();
             })
             .then(() => fetchBunnies());
