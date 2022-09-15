@@ -14,14 +14,11 @@ const ApplicationSchema = new Schema(
                 name: String,
                 phone: String,
                 address: String,
-                required: [true, errorMsg]
             },
             petsInfo: String,
-            required: [true, errorMsg]
         },
         desiredRabbitName: {
             type: String,
-            required: [true, errorMsg]
         },
         agreeToCare: {
             describeHousing: String,
@@ -30,14 +27,12 @@ const ApplicationSchema = new Schema(
             outdoorTime: {
                 agree: Boolean,
                 describe: String,
-                required: [true, errorMsg]
             },
             correctDiet: Boolean,
             financiallyAble: Boolean,
             informedMedical: Boolean,
             respectBoundaries: Boolean,
             groomingMaintenance: Boolean,
-            required: [true, errorMsg]
         },
         agreeToContact: {
             contactIfCannotKeep: Boolean,
@@ -51,4 +46,4 @@ const ApplicationSchema = new Schema(
 
 const Application = mongoose.model('Application', ApplicationSchema);
 
-export default Application;
+export default Application

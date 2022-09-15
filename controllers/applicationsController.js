@@ -1,4 +1,4 @@
-import Application from "../models/Application";
+import Application from "../models/Application.js";
 
 const submitApplication = async (req, res) => {
     await Bunny.create(req.body);
@@ -15,5 +15,5 @@ const deleteApplication = async (req, res) => {
     res.send(deletedApplication);
 }
 
-export default {submitApplication, viewApplications, deleteApplication}
+export {submitApplication, viewApplications, deleteApplication}
 

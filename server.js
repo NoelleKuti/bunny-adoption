@@ -17,7 +17,7 @@ const app = express();
 
 //routers
 import bunniesRoutes from './routes/bunniesRoutes.js'
-import applicationsRoutes from './routes/applicationsRoutes'
+import applicationsRoutes from './routes/applicationsRoutes.js'
 //db
 import connectDB from "./db/connect.js";
 
