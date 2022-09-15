@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useAppContext } from '../context/appContext'
+import { useAppContext } from '../../context/appContext'
 
 const FormFieldText = () => {
     const { handleTextInput, bunnyToEdit } = useAppContext();
     const { bunnyName, description, temperament, age, variation, imageLink } = bunnyToEdit;
     
-
-
     return (
       <TextFieldStyles>
         <div className='column formField'>

@@ -58,9 +58,6 @@ const reducer = (state, action) => {
                     imageLink : imageLink
                 },
                 bunnyToEdit: {...action.payload},
-                adoptionForm: {
-                    
-                }
             }
     }
 }

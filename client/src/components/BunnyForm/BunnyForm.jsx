@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import { useAppContext } from '../context/appContext'
-import BunnyFormHeaders from './BunnyFormHeaders.jsx'
+import { useAppContext } from '../../context/appContext'
+import BunnyFormHeaders from './BunnyFormHeaders'
 import BunnyFormField from './BunnyFormField'
 
 

@@ -1,24 +1,21 @@
-import BunnyForm from './components/BunnyForm';
-import { useAppContext } from './context/appContext';
+import {React} from 'react'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import styled from 'styled-components'
-import BunniesContainer from './components/BunniesContainer';
+import { BunniesContainer, Login, AppForm } from './components/index.js'
+import { AppProvider } from './context/appContext';
 
 function App() {
-    const { showForm, formType, toggleShowForm, bunnyToEdit } = useAppContext();  
+    
     return (
-        <AppStyles className='App'>
-        {showForm 
-            ? <BunnyForm />
-            :
-            <div className='column container'>
-                <button className='showFormButton' type='button' onClick={() => {toggleShowForm('add')}}>
-                    add a bunny
-                </button>
-                <BunniesContainer />
-            </div>
-        } 
-           
-        </AppStyles>
+        <BrowserRouter>
+            <AppProvider>
+                <Routes>
+                    <Route path="/" element={<BunniesContainer />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="application" element={<AppForm />} />
+                </Routes>
+            </AppProvider>
+        </BrowserRouter>
     );
 }
 

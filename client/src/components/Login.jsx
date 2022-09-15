@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
-const Login = () => {6
+const Login = () => {
 const { userName, password } = useAppContext();
 
     return (

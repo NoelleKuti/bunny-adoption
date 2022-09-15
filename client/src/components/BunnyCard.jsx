@@ -21,7 +21,7 @@ const BunnyCard = (props) => {
                         as='button'
                         className='button'
                             onClick={() => {
-                                chooseBunnyToEdit(objectId, bunnyData);
+                                chooseBunnyToEdit(bunnyData);
                             }} />
                            
                         <MdDeleteOutline

@@ -2,27 +2,34 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
 import BunnyCard from './BunnyCard'
+import BunnyForm from './BunnyForm/BunnyForm'
 
 const BunniesContainer = () => {
-    const { fetchBunnies, bunniesData } = useAppContext();
+    const { fetchBunnies, bunniesData, showForm, toggleShowForm } = useAppContext();   
 
-    useEffect(() => {
-        fetchBunnies()
-    }, [bunniesData]);
+  
+    !showForm 
+    ?   <BunnyForm/>
+    : 
+        
+        <ContainerStyles>
+            <button 
+                className='showFormButton' 
+                type='button' 
+                onClick={() => {toggleShowForm('add')}}>
+                    Add Bunnies!
+            </button> 
     
-    
-    
-        return (
-      <ContainerStyles>
-           {bunniesData.map((item) => {
-                return (
+            {bunniesData.map((item) => {
+                <div className='column container'>
                     <BunnyCard 
-                        key={'k'+item._id} objectId={item._id.toString()} 
-                        bunnyData={item}/>
-                )
+                        key={'k'+item._id} 
+                        objectId={item._id.toString()} 
+                        bunnyData={item}
+                    />
+                </div>
             })} 
-      </ContainerStyles>
-  )
+        </ContainerStyles>
 }
 
 const ContainerStyles = styled.div`
