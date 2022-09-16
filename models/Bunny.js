@@ -31,6 +31,5 @@ let bunnySchema = new Schema(
 
 let Bunny = mongoose.model("Bunny", bunnySchema);
 
-Bunny.schema.pre("findOneAndUpdate", function (next) { this.updateAt = new Date(); next(); })
 
 export default Bunny

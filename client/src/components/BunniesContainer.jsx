@@ -7,31 +7,37 @@ import BunnyForm from './BunnyForm/BunnyForm'
 const BunniesContainer = () => {
     const { fetchBunnies, bunniesData, showForm, toggleShowForm } = useAppContext();   
 
-  
-    !showForm 
-    ?   <BunnyForm/>
-    : 
-        
-        <ContainerStyles>
-            <button 
-                className='showFormButton' 
-                type='button' 
-                onClick={() => {toggleShowForm('add')}}>
-                    Add Bunnies!
-            </button> 
-    
-            {bunniesData.map((item) => {
-                <div className='column container'>
-                    <BunnyCard 
-                        key={'k'+item._id} 
-                        objectId={item._id.toString()} 
-                        bunnyData={item}
-                    />
-                </div>
-            })} 
-        </ContainerStyles>
-}
+	useEffect(() => {
+		fetchBunnies();
+	}, [])
 
+
+    if (showForm) { 
+    	return <BunnyForm/>
+	} else { 
+        return (
+			<ContainerStyles>
+				<button 
+					className='showFormButton'
+					type='button' 
+					onClick={() => {toggleShowForm('add')}}>
+						Add Bunnies!
+				</button> 
+				<div className='column container'>
+				{bunniesData.map((item) => {
+					return (
+						<BunnyCard 
+							key={'k'+item._id} 
+							objectId={item._id.toString()} 
+							bunnyData={item}
+						/>
+					);
+				})} 
+				</div>
+			</ContainerStyles>
+		)
+	}
+}
 const ContainerStyles = styled.div`
     display: flex;
     flex-wrap: wrap;

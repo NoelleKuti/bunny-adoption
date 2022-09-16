@@ -1,21 +1,26 @@
 import {React} from 'react'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import styled from 'styled-components'
 import { BunniesContainer, Login, AppForm } from './components/index.js'
-import { AppProvider } from './context/appContext';
+import './index.css'
 
-function App() {
+
+
+const App = () => {
     
     return (
-        <BrowserRouter>
-            <AppProvider>
-                <Routes>
-                    <Route path="/" element={<BunniesContainer />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="application" element={<AppForm />} />
-                </Routes>
-            </AppProvider>
-        </BrowserRouter>
+		<AppStyles>
+			<Router>
+            <Routes>
+                <Route path="/" element={<BunniesContainer />} />
+                    
+				<Route path="login" element={<Login />} />
+                    
+				<Route path="application" element={<AppForm />} />
+                
+			</Routes>
+        </Router>
+		</AppStyles>
     );
 }
 

@@ -57,6 +57,9 @@ const AppProvider = ({ children }) => {
                     payload: response.data,
                 })
             })
+			.catch((err) => {
+				console.log(err);
+			})
     }
 
     const addBunny = (formData) => {
