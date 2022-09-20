@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import reducer from './appReducer';
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT } from './appActions';
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, SHOW_ALERT, CLEAR_ALERT } from './appActions';
 import axios from 'axios'
 
 const initialState = {
@@ -14,10 +14,51 @@ const initialState = {
         variation: '',
         imageLink: '',
     },
-    showError: false,
-    errorText: '',
+    showAlert: false,
+    alertText: '',
+    alertType: '',
     bunniesData: [],
-    bunnyToEdit: {}
+    bunnyToEdit: {},
+    adoptForm: {
+        aboutYou: {
+            familyNamesAges: '',
+            address: '',
+            phoneNumber: '',
+            email: '',
+            vetInfo: {
+                vetName: '',
+                vetPhone: '',
+                vetAddress: '',
+            },
+            petsInfo: '',
+        },
+        desiredRabbitName: '',
+        agreeToCare: {
+            describeHousing: '',
+            indoorHousing: false,
+            sufficientSpace: false,
+            outdoorTime: {
+                agree: false,
+                describe: '',
+            },
+            correctDiet: false,
+            financiallyAble: false,
+            informedMedical: false,
+            respectBoundaries: false,
+            groomingMaintenance: false,
+        },
+        agreeToContact: {
+            contactIfCannotKeep: false,
+            properNotice: false,
+            neverRehome: false,
+            preventPregnancy: false,
+            willReachOut: false,
+        }, 
+    },
+    login: {
+        userName: '',
+        password: '',
+    }
 }
 
 const AppContext = createContext(initialState);
@@ -36,12 +77,16 @@ const AppProvider = ({ children }) => {
     const clearForm = () => {
         dispatch({ type: CLEAR_FORM})
     }
-    const handleTextInput = (e) => {
+    const handleTextInput = (data) => {
         dispatch({
             type: HANDLE_TEXT_INPUT,
-            payload: e
+            payload: {
+                e: data.e,
+                formName: data.formName
+            }
         })
     }
+
     const handleAgeChange = (data) => {
         dispatch({
             type: HANDLE_AGE_CHANGE,
@@ -93,6 +138,25 @@ const AppProvider = ({ children }) => {
                 fetchBunnies();
             })
     }
+
+    const clearAlert = () => {
+        dispatch({
+            type: CLEAR_ALERT
+        })
+    }
+
+    const showAlert = (data) => {
+        const {alertType, alertText} = data;
+        dispatch({ 
+            type: SHOW_ALERT,
+            payload: {
+                alertType: alertType,
+                alertText: alertText,
+            }
+        })
+    }
+
+
     return (
         <AppContext.Provider
             value={{
@@ -106,6 +170,8 @@ const AppProvider = ({ children }) => {
                 addBunny,
                 editBunny,
                 chooseBunnyToEdit,
+                showAlert,
+                clearAlert,
             }}>
             {children}
         </AppContext.Provider>

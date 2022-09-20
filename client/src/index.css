@@ -39,3 +39,18 @@ button {
 display: flex;
 flex-direction: column;
 }
+
+.alert {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.danger {
+  background-color: red;
+}
+
+.success {
+  background-color: green;
+}

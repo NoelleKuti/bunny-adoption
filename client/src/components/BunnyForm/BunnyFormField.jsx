@@ -33,7 +33,7 @@ const FormFieldText = () => {
                 className='textInput' 
                 name='description' 
                 placeholder="Add Description Of Bunny" 
-                onChange={(e) => { handleTextInput(e) }} 
+                onChange={(e) => { handleTextInput({e:e, formName:'bunny'}) }} 
                 defaultValue={description} 
             />
             <div className=' row helperText'>
@@ -48,7 +48,7 @@ const FormFieldText = () => {
                 type='text'
                 name='temperament'
                 placeholder="Add Bunny's Temperament"
-                onChange={(e) => { handleTextInput(e) }}
+                onChange={(e) => { handleTextInput({e:e, formName:'bunny'}) }} 
                 defaultValue={temperament}
             />
         </div>
@@ -61,7 +61,7 @@ const FormFieldText = () => {
                 type='text'
                 name='age'
                 placeholder="Add Bunny's age"
-                onChange={(e) => { handleTextInput(e) }}
+                onChange={(e) => { handleTextInput({e:e, formName:'bunny'}) }} 
                 defaultValue={age}
             />
         </div>
@@ -74,7 +74,7 @@ const FormFieldText = () => {
                 type='text'
                 name='variation'
                 placeholder="Add Bunny's Variations (if any)"
-                onChange={(e) => { handleTextInput(e) }}
+                onChange={(e) => { handleTextInput({e:e, formName:'bunny'}) }} 
                 defaultValue={variation}
             />
         </div>
@@ -87,7 +87,7 @@ const FormFieldText = () => {
                 type='text'
                 name='imgLink'
                 placeholder="Link To Image Of Bunny"
-                onChange={(e) => { handleTextInput(e) }}
+                onChange={(e) => { handleTextInput({e:e, formName:'bunny'}) }} 
                 defaultValue={imageLink}
             />
         </div>

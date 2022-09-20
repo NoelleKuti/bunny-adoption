@@ -1,4 +1,4 @@
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT } from "./appActions";
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, SHOW_ALERT, CLEAR_ALERT } from "./appActions";
 import { initialState } from "./appContext";
 
 const reducer = (state, action) => {
@@ -27,23 +27,37 @@ const reducer = (state, action) => {
                 xdoor: '',
                 fixed: false,
                 available: true,
-                showError: false,
-                errorText: '',
+                showAlert: false,
+                alertText: '',
             }
         case HANDLE_TEXT_INPUT:
-            const e = action.payload;
-            return {
-                ...state,
-                form : {
-                    ...state.form,
-                    [e.target.name] : e.target.value,
-                }
+            let {e, formName} = action.payload;
+            switch (formName) {
+                case 'bunny':
+                    return {
+                        ...state,
+                        form : {
+                            ...state.form,
+                            [e.target.name] : e.target.value,
+                        }
+                    }
+                case 'login':
+                    return {
+                        ...state,
+                        login : {
+                            ...state.login,
+                            [e.target.name] : e.target.value
+                        }
+                    }
+                case 'adoptForm':
+                    console.log('still under construction!');
             }
+            
+           
         case VIEW_BUNNIES:
-            const data = action.payload;
             return {
                 ...state,
-                bunniesData: data
+                bunniesData: action.payload,
             }
         case CHOOSE_BUNNY_TO_EDIT:
             const { bunnyName, description, temperament, age, variation, imageLink } = action.payload;
@@ -58,6 +72,21 @@ const reducer = (state, action) => {
                     imageLink : imageLink
                 },
                 bunnyToEdit: {...action.payload},
+            }
+        case SHOW_ALERT:
+            const {alertType, alertText} = action.payload;
+            return {
+                ...state,
+                showAlert: true,
+                alertType: alertType,
+                alertText: alertText
+            }
+        case CLEAR_ALERT:
+            return {
+                ...state,
+                showAlert: false,
+                alertText: '',
+                alertType: '',
             }
     }
 }
