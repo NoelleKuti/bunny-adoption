@@ -1,29 +1,28 @@
 import React from 'react'
-import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
-
 import Alert from './Alert'
+import axios from 'axios'
 
 
 const Login = () => {
 
-    const { login, showAlert, clearAlert, handleTextInput } = useAppContext();
+    const { login, showAlert, clearAlert, handleTextInput, toggleShowAlert } = useAppContext();
 
     const {userName, password} = login;
 
     const handleLogin = (e) => {
         e.preventDefault();
-        if (e.target.userName !== 'bunnyuser' || e.target.password !== 'bunnypassword') {
-            showAlert({alertType: 'danger', alertText: 'username or password are not correct'});
-            setTimeout((clearAlert(), 5000));
-        } else {
-            showAlert({alertType: 'success', alertText: 'login successful! redirecting...'});
-            setTimeout((clearAlert(), 5000));
+        
+        axios.post('http://localhost:5000/api/v1/login/', {userName, password})
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
         }
-    }
-
     return (
-        <LoginForm className='row'>
+        <form name='loginForm' className='row' onSubmit={(e) => handleLogin(e)}>
             {showAlert && <Alert />}
             <div className='column'>
                 <p>UserName:</p>
@@ -41,10 +40,10 @@ const Login = () => {
                     defaultValue = {password}
                     onChange = {(e) => {handleTextInput({e:e, formName:'login'})}}
                 />
-                  <button type='submit' onClick={(e) => handleLogin(e)}>Log In</button>
+                  <button type='submit'>Log In</button>
             </div>
           
-        </LoginForm>
+        </form>
 
 
 
@@ -53,9 +52,5 @@ const Login = () => {
 
 }
 
-const LoginForm = styled.form `
-    margin: 0px auto;
 
-
-`
 export default Login

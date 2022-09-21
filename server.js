@@ -18,6 +18,7 @@ const app = express();
 //routers
 import bunniesRoutes from './routes/bunniesRoutes.js'
 import applicationsRoutes from './routes/applicationsRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 //db
 import connectDB from "./db/connect.js";
 
@@ -35,6 +36,7 @@ const port = process.env.PORT || 5000;
 app.use('/api/v1/bunnies', bunniesRoutes);
 
 app.use('/api/v1/applications', applicationsRoutes);
+app.use('/api/v1/login', authRoutes);
 
 //mongoose
 const start = async () => {

@@ -41,7 +41,8 @@ const ApplicationSchema = new Schema(
             preventPregnancy: Boolean,
             willReachOut: Boolean,
         },
-    }
+    },
+    {collection: 'Applications'},
 )
 
 const Application = mongoose.model('Application', ApplicationSchema);

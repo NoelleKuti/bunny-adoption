@@ -1,4 +1,4 @@
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, SHOW_ALERT, CLEAR_ALERT } from "./appActions";
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT } from "./appActions";
 import { initialState } from "./appContext";
 
 const reducer = (state, action) => {
@@ -73,7 +73,7 @@ const reducer = (state, action) => {
                 },
                 bunnyToEdit: {...action.payload},
             }
-        case SHOW_ALERT:
+        case TOGGLE_SHOW_ALERT:
             const {alertType, alertText} = action.payload;
             return {
                 ...state,
