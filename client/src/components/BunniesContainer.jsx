@@ -1,29 +1,37 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
 import BunnyCard from './BunnyCard'
 import BunnyForm from './BunnyForm/BunnyForm'
+import NavBar from './NavBar'
 
 const BunniesContainer = () => {
-    const { fetchBunnies, bunniesData, showForm, toggleShowForm } = useAppContext();   
+    const { fetchBunnies, bunniesData, showForm, toggleShowForm, checkAuth, authKey } = useAppContext();   
+
+	console.log(checkAuth(authKey));
 
 	useEffect(() => {
 		fetchBunnies();
+		checkAuth();
+
 	}, [])
+	
 
-
-    if (showForm) { 
+    if (checkAuth(authKey) && showForm) { 
     	return <BunnyForm/>
 	} else { 
         return (
 			<ContainerStyles>
-				<button 
-					className='showFormButton'
-					type='button' 
-					onClick={() => {toggleShowForm('add')}}>
-						Add Bunnies!
-				</button> 
-				<div className='column container'>
+				<NavBar />
+				{ checkAuth(authKey) && 
+					<button 
+						className='showFormButton'
+						type='button' 
+						onClick={() => {toggleShowForm('add')}}>
+							Add Bunnies!
+					</button> 
+				}
+				<div className='row container'>
 				{bunniesData.map((item) => {
 					return (
 						<BunnyCard 
@@ -43,5 +51,7 @@ const ContainerStyles = styled.div`
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 1rem;
+	width: 80%;
+	margin: 0px auto;
 `
 export default BunniesContainer

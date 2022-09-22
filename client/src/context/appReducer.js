@@ -1,4 +1,4 @@
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT } from "./appActions";
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN } from "./appActions";
 import { initialState } from "./appContext";
 
 const reducer = (state, action) => {
@@ -16,19 +16,10 @@ const reducer = (state, action) => {
                 form: state.bunnyToEdit,
                 formType: 'edit'
             }
-        case CLEAR_FORM:
+        case CLEAR_FORMS:
             return {
-                ...state,
-                catName: '',
-                description: '',
-                charsRemaining: 500,
-                yearsOld: 0,
-                monthsOld: 0,
-                xdoor: '',
-                fixed: false,
-                available: true,
-                showAlert: false,
-                alertText: '',
+                ...initialState,
+                loggedIn: state.loggedIn,
             }
         case HANDLE_TEXT_INPUT:
             let {e, formName} = action.payload;
@@ -51,6 +42,7 @@ const reducer = (state, action) => {
                     }
                 case 'adoptForm':
                     console.log('still under construction!');
+                default: console.log('something went wrong in appReducer.js');
             }
             
            
@@ -88,6 +80,26 @@ const reducer = (state, action) => {
                 alertText: '',
                 alertType: '',
             }
+        case LOGIN_ADMIN:
+            return {
+                ...state,
+                loggedIn : true,
+                login: {
+                    userName: '',
+                    password: '',
+                },
+                authKey: action.payload.data
+            }
+        case LOGOUT_ADMIN:
+            return {
+                ...state,
+                authKey: '',
+                login: {
+                    userName: '',
+                    password: '',
+                },
+            }
+        default: console.log('something went wrong in appReducer.js')
     }
 }
 

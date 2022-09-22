@@ -8,7 +8,10 @@ const BunnyCard = (props) => {
     const { objectId, bunnyData } = props;
     const { bunnyName, description, temperament, age, variation, imageLink } = bunnyData;
  
-    const { deleteBunny, chooseBunnyToEdit } = useAppContext();
+    const { deleteBunny, chooseBunnyToEdit, authKey, checkAuth } = useAppContext();
+
+    
+	
     
 
     return (
@@ -16,17 +19,19 @@ const BunnyCard = (props) => {
             <div className='card'>
                 <div className='cardHeader row'>
                     <h2>{bunnyName}</h2>
-                    <div className='buttonContainer row'>
-                        <MdOutlineModeEdit
-                        as='button'
-                        className='button'
-                            onClick={() => {
-                                chooseBunnyToEdit(bunnyData);
-                            }} />
-                           
-                        <MdDeleteOutline
-                        as='button' className='button' onClick={() => window.confirm(`You are about to delete ${bunnyName}. Are you sure?`) && deleteBunny(objectId)}/>
-                    </div>
+                    {checkAuth(authKey) &&
+                        <div className='buttonContainer row'>
+                            <MdOutlineModeEdit
+                            as='button'
+                            className='button'
+                                onClick={() => {
+                                    chooseBunnyToEdit(bunnyData);
+                                }} />
+                            
+                            <MdDeleteOutline
+                            as='button' className='button' onClick={() => window.confirm(`You are about to delete ${bunnyName}. Are you sure?`) && deleteBunny(objectId)}/>
+                        </div>
+                    }           
                 </div>
                 <div className='cardText'>
                     <p>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import reducer from './appReducer';
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORM, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT } from './appActions';
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN } from './appActions';
 import axios from 'axios'
 
 const initialState = {
@@ -58,7 +58,8 @@ const initialState = {
     login: {
         userName: '',
         password: '',
-    }
+    },
+    authKey: '',
 }
 
 const AppContext = createContext(initialState);
@@ -74,8 +75,8 @@ const AppProvider = ({ children }) => {
         }
     }
     
-    const clearForm = () => {
-        dispatch({ type: CLEAR_FORM})
+    const clearForms = () => {
+        dispatch({ type: CLEAR_FORMS})
     }
     const handleTextInput = (data) => {
         dispatch({
@@ -157,13 +158,57 @@ const AppProvider = ({ children }) => {
         })
     }
 
+    const handleLogin = (e, data) => {
+        e.preventDefault();
+        const {userName, password} = data;
+
+        axios.post('http://localhost:5000/api/v1/auth/login', {userName, password})
+            .then((res) => {
+                console.log(res.data.message);
+                if (res.data.success === true) {
+                    toggleShowAlert({alertType: 'success', alertText: res.data.message});
+                    setTimeout(clearAlert, 5000);
+                    dispatch({ type: LOGIN_ADMIN, payload: {data: res.data.key}})
+                } else {
+                    toggleShowAlert({alertType: 'danger', alertText: res.data.message});
+                    setTimeout(clearAlert, 5000);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    const handleLogout = () => {
+        dispatch({
+            type: LOGOUT_ADMIN
+        })
+    }
+
+    const getKey = () => {
+        return axios.get('http://localhost:5000/api/v1/auth/check')
+    } 
+
+    const checkAuth = async (key) => {
+		const request = await getKey();
+		const officialKey = request.data;
+		
+		if (key === officialKey) {
+			//console.log(`${key} equals ${officialKey}`);
+			return true;
+		} else if (key !== officialKey) {
+			//console.log(`${key} does not equal ${officialKey}`);
+			return false;
+		}
+	}
+    
+    
 
     return (
         <AppContext.Provider
             value={{
                 ...state,
                 toggleShowForm,
-                clearForm,
+                clearForms,
                 handleTextInput,
                 handleAgeChange,
                 fetchBunnies,
@@ -173,6 +218,10 @@ const AppProvider = ({ children }) => {
                 chooseBunnyToEdit,
                 toggleShowAlert,
                 clearAlert,
+                handleLogin,
+                handleLogout,
+                getKey,
+                checkAuth
             }}>
             {children}
         </AppContext.Provider>

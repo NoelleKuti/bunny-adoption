@@ -36,7 +36,7 @@ const port = process.env.PORT || 5000;
 app.use('/api/v1/bunnies', bunniesRoutes);
 
 app.use('/api/v1/applications', applicationsRoutes);
-app.use('/api/v1/login', authRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 //mongoose
 const start = async () => {

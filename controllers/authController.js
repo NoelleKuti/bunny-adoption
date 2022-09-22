@@ -6,11 +6,16 @@ const loginUser = async (req, res) => {
   
     
     if (req.body.userName === credentials[0].userName && req.body.password === credentials[0].password) {
-        await res.send('login successful, access granted');
+        await res.send({success: true, message: 'login successful, access granted', key: '632a3b39d624da010cc003f3'});
     } else {
-        await res.send('login UNSUCCESSFUL, access DENIED');
-    }
-    
+        await res.send({success: false, message: 'login UNSUCCESSFUL, access DENIED', key: ''});
+    } 
 }
 
-export { loginUser }
+const getKey = async (req, res) => {
+    await res.send('632a3b39d624da010cc003f3');
+}
+
+
+
+export { loginUser, getKey }

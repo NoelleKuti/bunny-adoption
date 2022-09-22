@@ -1,5 +1,5 @@
 import {React} from 'react'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {Routes, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import { BunniesContainer, Login, AppForm } from './components/index.js'
 import './index.css'
@@ -10,16 +10,16 @@ const App = () => {
     
     return (
 		<AppStyles>
-			<Router>
             <Routes>
                 <Route path="/" element={<BunniesContainer />} />
                     
-				<Route path="login" element={<Login />} />
+				<Route path="login" 
+                    element={<Login/>}
+                />
                     
-				<Route path="adopt" element={<AppForm />} />
+				<Route path="apply" element={<AppForm />} />
                 
 			</Routes>
-        </Router>
 		</AppStyles>
     );
 }
