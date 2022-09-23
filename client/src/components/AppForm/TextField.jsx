@@ -8,7 +8,7 @@ const TextField = (props) => {
         type='textarea'
         name={fieldName}
         helperText={helperText}
-        placeHolder={placeHolder}
+        placeholder={placeHolder}
         cols='50' rows='50'
     />
   )

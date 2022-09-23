@@ -7,54 +7,47 @@ import { useNavigate  } from 'react-router-dom'
 
 const Login = () => {
 
-    const { showAlert, handleTextInput, login, handleLogin } = useAppContext();
+    const { showAlert, handleTextInput, login, handleLogin, checkAuth, authKey, isLoggedIn } = useAppContext();
     const {userName, password} = login;
 
     const navigate = useNavigate();
-    const [values, setValues] = useState({isAdmin: false});
-
-    
-
-    const toggleAdmin = () => {
-        setValues({ isAdmin: !values.isAdmin});
-    }
+  
 
     const onSubmitForm = (e) => {
         handleLogin(e, {userName, password});
-        toggleAdmin();
     }
 
     
     useEffect(() => {
-        if (values.isAdmin) {
+        if (isLoggedIn) {
             setTimeout(() => {
                 navigate('/')
             }, 3000)
         }
-    }, [values.isAdmin, navigate]);
+    }, [isLoggedIn, navigate]);
     
 
     return (
-        <form name='loginForm' className='row' onSubmit={onSubmitForm}>
-            {showAlert && <Alert />}
-            <div className='column'>
-                <p>UserName:</p>
-                <input 
-                    type= 'text'
-                    name='userName'
-                    defaultValue = {userName}
-                    onChange = {(e) => {handleTextInput({e:e, formName:'login'})}}
-                />
-            </div> 
-            <div className='column'>
-                <p>Password:</p><input
-                    type='password'
-                    name='password'
-                    defaultValue = {password}
-                    onChange = {(e) => {handleTextInput({e:e, formName:'login'})}}
-                />
-                  <button type='submit'>Log In</button>
-            </div>
+        <form id='login' name='loginForm' className='column' onSubmit={onSubmitForm}>
+            {<Alert />}
+				<div className='column loginCol'>
+					<p>UserName:</p>
+					<input 
+						type= 'text'
+						name='userName'
+						defaultValue = {userName}
+						onChange = {(e) => {handleTextInput({e:e, formName:'login'})}}
+					/>
+				</div> 
+				<div className='column loginCol'>
+					<p>Password:</p><input
+						type='password'
+						name='password'
+						defaultValue = {password}
+						onChange = {(e) => {handleTextInput({e:e, formName:'login'})}}
+					/>
+                </div>
+			<button type='submit' className='submitBtn'>Log In</button>
           
         </form>
 

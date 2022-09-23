@@ -17,7 +17,7 @@ const FormFieldText = () => {
                     type='text' 
                     name='bunnyName' 
                     placeholder="Add Bunny's Name" 
-                    onChange={(e) => { handleTextInput(e) }} 
+                    onChange={(e) => { handleTextInput({e:e, formName:'bunny'}) }} 
                     defaultValue= {bunnyName}
                 />
             <div className='row helperText'>
@@ -85,7 +85,7 @@ const FormFieldText = () => {
             <input 
                 className='textInput'
                 type='text'
-                name='imgLink'
+                name='imageLink'
                 placeholder="Link To Image Of Bunny"
                 onChange={(e) => { handleTextInput({e:e, formName:'bunny'}) }} 
                 defaultValue={imageLink}

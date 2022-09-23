@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { useAppContext } from '../../context/appContext'
 import TextField from './TextField'
 
@@ -7,6 +8,7 @@ const AppForm = () => {
   return (
     <form>
       <h1> Application Form </h1>
+	  <Link to='/'>Home</Link>
       <div className='group' id='aboutYou'>
         <TextField
           fieldName='familyNamesAges'

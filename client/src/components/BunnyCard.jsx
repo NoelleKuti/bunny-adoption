@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useAppContext } from '../context/appContext';
 import { MdDeleteOutline, MdOutlineModeEdit } from 'react-icons/md'
@@ -8,31 +8,37 @@ const BunnyCard = (props) => {
     const { objectId, bunnyData } = props;
     const { bunnyName, description, temperament, age, variation, imageLink } = bunnyData;
  
-    const { deleteBunny, chooseBunnyToEdit, authKey, checkAuth } = useAppContext();
+    const { deleteBunny, chooseBunnyToEdit, authKey, checkAuth, isLoggedIn } = useAppContext();
 
-    
+
+	let initial = false;
+
+	if (!imageLink) {
+		initial = true;
+	}
+
+    const [viewText, setViewText] = useState(initial);
 	
-    
-
     return (
-        <CardStyles className='column'>
-            <div className='card'>
+        <CardStyles viewText = {viewText}>
+            <div className='card column'>
                 <div className='cardHeader row'>
                     <h2>{bunnyName}</h2>
-                    {checkAuth(authKey) &&
+                    {isLoggedIn &&
                         <div className='buttonContainer row'>
                             <MdOutlineModeEdit
                             as='button'
-                            className='button'
+                            className='button cardBtn'
                                 onClick={() => {
-                                    chooseBunnyToEdit(bunnyData);
+                                    checkAuth(localStorage.getItem('creds')) &&chooseBunnyToEdit(bunnyData)
                                 }} />
                             
                             <MdDeleteOutline
-                            as='button' className='button' onClick={() => window.confirm(`You are about to delete ${bunnyName}. Are you sure?`) && deleteBunny(objectId)}/>
+                            as='button' className='button cardBtn' onClick={() => checkAuth(localStorage.getItem('creds')) && window.confirm(`You are about to delete ${bunnyName}. Are you sure?`) && deleteBunny(objectId)}/>
                         </div>
                     }           
                 </div>
+				<img src={imageLink} alt={`no pics to show of ${bunnyName}`} className='bunImage'/>
                 <div className='cardText'>
                     <p>
                         Description: {description}
@@ -47,7 +53,14 @@ const BunnyCard = (props) => {
                         Variation: {variation}
                     </p>
                 </div>
-                <image src={imageLink} alt='bunny' />
+				<button 
+					className='switchViewBtn button' 	type='button' 
+					onClick={() => {
+						setViewText(!viewText)
+						}}
+				>
+					{ viewText ? 'hide info' : 'more info' }
+				</button>
             </div>
         </CardStyles>
     )
@@ -55,51 +68,56 @@ const BunnyCard = (props) => {
 
 const CardStyles = styled.div`
     .card {
-        width: 400px;
+		width: 400px;
         border: 1px solid black;
         border-radius: 20px;
         background-color: var(--50);
-        margin: 1rem 1rem 1rem 1rem;
-        
+        height: 600px;
         justify-content: space-between;
+		align-items: center;
+		position: relative;
+
+		.bunImage {
+		max-width: 100%;
+		margin: 0px auto;
+		align-content: center;
+		color: #a1a1a1;
+		border: 2px solid green;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 8rem;
+		display: ${props => (props.viewText ? 'none' : 'initial')};
+	}
     }
     .cardHeader {
-        width: 90%;
+		width: 100%;
         margin: 0px auto; 
-        padding: 1rem; 
+        padding: 1rem;
         justify-content: space-between;
+		align-content: center;
         h2 {
-            margin-left: 10px;
+			width: 60%;
             font-size: 25px;
+			word-wrap: wrap;
         }
         .buttonContainer {
-            width: 50%;
-            align-items: flex-end;
-            justify-content: flex-end;
-            button {
-                margin: 0 10px 10px 0;
-            }
+		   align-self: flex-start;
+		   max-width: 35%;
+		   flex-wrap: no wrap;
         }
     }
     .cardText {
         padding: 1rem;
+		position: absolute;
+		top: 8rem;
+		display: ${props => (props.viewText ? 'initial' : 'none')}
     }
-    span {
-        font-weight: 700;
-        text-decoration: underline;
-    }
-    .timeStamps {
-        font-size: 10px;
+    .cardBtn {
+        width: 3rem;
+        height: 3rem;
         padding: 1rem;
-        justify-self: flex-end;
-        border-top: 1px solid var(--500);
-        background-color: var(--100);
-        border-radius: 0 0 20px 20px;
-    }
-    .button {
-        width: 2rem;
-        height: 2rem;
-        padding: 1rem;
+		font-size: 25px;
         border: none;
         margin: 5px 5px 5px 5px;
         border-radius: 50%;
@@ -111,6 +129,16 @@ const CardStyles = styled.div`
             background-color:var(--400);
         }
     }
+
+	.switchViewBtn {
+		background-color: none;
+		border: none;
+		box-shadow: none;
+		padding: 2rem;
+		margin: 1rem;
+	}
+
+	
 
 
 `

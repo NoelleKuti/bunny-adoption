@@ -3,36 +3,36 @@ import styled from 'styled-components'
 import { useAppContext } from '../context/appContext'
 import BunnyCard from './BunnyCard'
 import BunnyForm from './BunnyForm/BunnyForm'
-import NavBar from './NavBar'
 
 const BunniesContainer = () => {
-    const { fetchBunnies, bunniesData, showForm, toggleShowForm, checkAuth, authKey } = useAppContext();   
-
-	console.log(checkAuth(authKey));
+    const { fetchBunnies, bunniesData, showForm, toggleShowForm, checkAuth, isLoggedIn } = useAppContext();   
 
 	useEffect(() => {
 		fetchBunnies();
-		checkAuth();
-
+		if (localStorage.getItem('creds')) {
+			checkAuth(localStorage.getItem('creds'))
+		}
 	}, [])
 	
 
-    if (checkAuth(authKey) && showForm) { 
+    if (isLoggedIn && showForm) { 
     	return <BunnyForm/>
 	} else { 
         return (
-			<ContainerStyles>
-				<NavBar />
-				{ checkAuth(authKey) && 
-					<button 
-						className='showFormButton'
-						type='button' 
-						onClick={() => {toggleShowForm('add')}}>
-							Add Bunnies!
-					</button> 
-				}
+			<ContainerStyles className='column'>
+				<div className='addButtonContainer'>
+					{ isLoggedIn && 
+						<button 
+							className='showFormButton'
+							type='button' 
+							onClick={() => {checkAuth(localStorage.getItem('creds')) && toggleShowForm('add')}}>
+								Add Bunnies!
+						</button> 
+					}
+				</div>
 				<div className='row container'>
-				{bunniesData.map((item) => {
+				{bunniesData && bunniesData.map((item) => {
+					console.log(item);
 					return (
 						<BunnyCard 
 							key={'k'+item._id} 
@@ -40,18 +40,25 @@ const BunniesContainer = () => {
 							bunnyData={item}
 						/>
 					);
-				})} 
+					
+				})}
 				</div>
 			</ContainerStyles>
 		)
 	}
 }
 const ContainerStyles = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    padding: 1rem;
-	width: 80%;
-	margin: 0px auto;
+	width: 100%;
+	margin: 0 auto;
+
+	.showFormButton {
+		width: 25%;
+	}
+
+	.addButtonContainer {
+		height: 1rem;
+		display: flex;
+		margin-top: 6rem;
+	}
 `
 export default BunniesContainer

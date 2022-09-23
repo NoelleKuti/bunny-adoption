@@ -60,6 +60,7 @@ const initialState = {
         password: '',
     },
     authKey: '',
+	isLoggedIn: false,
 }
 
 const AppContext = createContext(initialState);
@@ -136,7 +137,7 @@ const AppProvider = ({ children }) => {
         axios.patch(`http://localhost:5000/api/v1/bunnies/${id}`, data)
             .then((response) => {
                 dispatch({type: TOGGLE_EDIT_FORM})
-                fetchBunnies();
+				fetchBunnies();
             })
     }
 
@@ -167,8 +168,12 @@ const AppProvider = ({ children }) => {
                 console.log(res.data.message);
                 if (res.data.success === true) {
                     toggleShowAlert({alertType: 'success', alertText: res.data.message});
-                    setTimeout(clearAlert, 5000);
-                    dispatch({ type: LOGIN_ADMIN, payload: {data: res.data.key}})
+                    
+					setTimeout(clearAlert, 5000);
+                    
+					dispatch({ type: LOGIN_ADMIN, payload: {data: res.data.key}})
+
+					localStorage.setItem('creds', res.data.key)
                 } else {
                     toggleShowAlert({alertType: 'danger', alertText: res.data.message});
                     setTimeout(clearAlert, 5000);
@@ -182,6 +187,7 @@ const AppProvider = ({ children }) => {
         dispatch({
             type: LOGOUT_ADMIN
         })
+		localStorage.removeItem('creds');
     }
 
     const getKey = () => {
@@ -190,16 +196,25 @@ const AppProvider = ({ children }) => {
 
     const checkAuth = async (key) => {
 		const request = await getKey();
-		const officialKey = request.data;
+		const officialKey = request.data.key;
 		
 		if (key === officialKey) {
 			//console.log(`${key} equals ${officialKey}`);
-			return true;
+			dispatch({
+				type: LOGIN_ADMIN,
+				payload: {
+					data: officialKey
+				}
+			});
 		} else if (key !== officialKey) {
 			//console.log(`${key} does not equal ${officialKey}`);
-			return false;
+			dispatch({
+				type: LOGOUT_ADMIN
+			})
 		}
 	}
+
+	
     
     
 

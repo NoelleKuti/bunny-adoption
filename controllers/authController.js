@@ -13,7 +13,7 @@ const loginUser = async (req, res) => {
 }
 
 const getKey = async (req, res) => {
-    await res.send('632a3b39d624da010cc003f3');
+    await res.send({key: '632a3b39d624da010cc003f3'});
 }
 
 

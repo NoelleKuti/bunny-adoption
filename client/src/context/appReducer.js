@@ -8,18 +8,20 @@ const reducer = (state, action) => {
                 ...initialState,
                 showForm: (!state.showForm),
                 formType: 'add',
+				isLoggedIn: state.isLoggedIn,
             }
         case TOGGLE_EDIT_FORM:
             return {
                 ...state,
                 showForm: (!state.showForm),
                 form: state.bunnyToEdit,
-                formType: 'edit'
+                formType: 'edit',
+				isLoggedIn: state.isLoggedIn,
             }
         case CLEAR_FORMS:
             return {
                 ...initialState,
-                loggedIn: state.loggedIn,
+                isLoggedIn: state.isLoggedIn,
             }
         case HANDLE_TEXT_INPUT:
             let {e, formName} = action.payload;
@@ -30,7 +32,7 @@ const reducer = (state, action) => {
                         form : {
                             ...state.form,
                             [e.target.name] : e.target.value,
-                        }
+                        },
                     }
                 case 'login':
                     return {
@@ -42,10 +44,12 @@ const reducer = (state, action) => {
                     }
                 case 'adoptForm':
                     console.log('still under construction!');
-                default: console.log('something went wrong in appReducer.js');
-            }
-            
-           
+					break;
+                default: 
+					console.log('something went wrong in appReducer.js');    
+				}
+				break;
+	
         case VIEW_BUNNIES:
             return {
                 ...state,
@@ -88,7 +92,8 @@ const reducer = (state, action) => {
                     userName: '',
                     password: '',
                 },
-                authKey: action.payload.data
+                authKey: action.payload.data,
+				isLoggedIn: true,
             }
         case LOGOUT_ADMIN:
             return {
@@ -98,6 +103,7 @@ const reducer = (state, action) => {
                     userName: '',
                     password: '',
                 },
+				isLoggedIn: false,
             }
         default: console.log('something went wrong in appReducer.js')
     }
