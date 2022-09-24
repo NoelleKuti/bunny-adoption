@@ -41,7 +41,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-	app.use(express.static("client/build"));
+	app.use(express.static(path.join(__dirname, "client/build")));
 
 	app.use(express.static(path.join(__dirname, "client/public")));
   
