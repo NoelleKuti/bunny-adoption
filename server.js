@@ -42,16 +42,18 @@ const port = process.env.PORT || 5000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-	app.use(express.static(path.join(__dirname, "client/public")));
+	//app.use(express.static(path.join(__dirname, "client/public")));
+
+	app.use(express.static(path.join(__dirname, "client/build")));
   
-	/*
+	
 	app.get("*", (req, res) => {
 	  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
-	*/
+	
 
 	app.get('/', () => {
-		res.send('Welcome To Express!');
+		res.send(<h1>Hello!</h1>);
 	})
 
   
