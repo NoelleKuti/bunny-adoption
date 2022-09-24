@@ -27,9 +27,11 @@ import connectDB from "./db/connect.js";
 app.use(cors(), express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/*
 app.get('/', (req, res) => {
     res.send('Connected To Express!');
 });
+*/
 
 app.get(cors(corsConfig));
 
@@ -40,10 +42,7 @@ const port = process.env.PORT || 5000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
-	app.use(express.static(path.join(__dirname, "client/build")));
-
-	app.use(express.static(path.join(__dirname, "client/public")));
+	app.use(express.static("client/public"));
   
 	app.get("*", (req, res) => {
 	  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
