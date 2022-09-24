@@ -35,7 +35,7 @@ app.get(cors(corsConfig));
 
 const port = process.env.PORT || 5000;
 
-/*
+
 //serve from index.html '\'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,7 +49,7 @@ const __dirname = path.dirname(__filename);
 	  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
 
-	*/
+
   
   
   
