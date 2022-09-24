@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { useAppContext } from '../context/appContext'
-import Alert from './Alert'
+import { useAppContext } from '../context/appContext.js'
+import Alert from './Alert.js'
 import { useNavigate } from 'react-router-dom'
 
 

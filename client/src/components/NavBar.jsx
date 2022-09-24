@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useAppContext } from '../context/appContext'
+import { useAppContext } from '../context/appContext.js'
 
 
 const NavBar = () => {
-    const { handleLogout, authKey, checkAuth, isLoggedIn } = useAppContext();
+    const { handleLogout, isLoggedIn } = useAppContext();
     
 
    

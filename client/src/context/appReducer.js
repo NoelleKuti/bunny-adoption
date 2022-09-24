@@ -1,5 +1,5 @@
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN } from "./appActions";
-import { initialState } from "./appContext";
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN } from "./appActions.js";
+import { initialState } from "./appContext.js";
 
 const reducer = (state, action) => {
     switch (action.type) {
