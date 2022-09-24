@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '../context/appContext'
 import Alert from './Alert'
 import { useNavigate  } from 'react-router-dom'
@@ -7,7 +7,7 @@ import { useNavigate  } from 'react-router-dom'
 
 const Login = () => {
 
-    const { showAlert, handleTextInput, login, handleLogin, checkAuth, authKey, isLoggedIn } = useAppContext();
+    const { handleTextInput, login, handleLogin, isLoggedIn } = useAppContext();
     const {userName, password} = login;
 
     const navigate = useNavigate();
