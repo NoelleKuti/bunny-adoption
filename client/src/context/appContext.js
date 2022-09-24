@@ -74,6 +74,7 @@ const AppProvider = ({ children }) => {
         } else if (formType === 'edit') {
             dispatch({ type: TOGGLE_EDIT_FORM})
         }
+		fetchBunnies();
     }
     
     const clearForms = () => {
@@ -116,7 +117,6 @@ const AppProvider = ({ children }) => {
             })
             .then(() => {
                 dispatch({type: TOGGLE_ADD_FORM})
-				fetchBunnies();
             })
     }
 
@@ -138,7 +138,6 @@ const AppProvider = ({ children }) => {
         axios.patch(`/api/v1/bunnies/${id}`, data)
             .then((response) => {
                 dispatch({type: TOGGLE_EDIT_FORM})
-				fetchBunnies();
             })
     }
 
