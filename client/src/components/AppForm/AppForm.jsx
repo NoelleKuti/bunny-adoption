@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../../context/appContext.js'
-import TextField from './TextField.js'
+import TextField from './TextField'
 
 const AppForm = () => {
   return (

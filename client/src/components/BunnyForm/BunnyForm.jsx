@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useAppContext } from '../../context/appContext.js'
-import BunnyFormHeaders from './BunnyFormHeaders.js'
-import BunnyFormField from './BunnyFormField.js'
+import BunnyFormHeaders from './BunnyFormHeaders'
+import BunnyFormField from './BunnyFormField'
 
 
 const BunnyForm = () => {

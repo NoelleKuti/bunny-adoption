@@ -1,8 +1,8 @@
-import BunnyForm from "./BunnyForm/BunnyForm.js";
-import BunniesContainer from './BunniesContainer.js'
-import Login from './Login.js'
-import AppForm from "./AppForm/AppForm.js";
-import BunnyCard from "./BunnyCard.js";
-import Alert from "./Alert.js";
-import NavBar from "./NavBar.js";
+import BunnyForm from "./BunnyForm/BunnyForm";
+import BunniesContainer from './BunniesContainer'
+import Login from './Login'
+import AppForm from "./AppForm/AppForm";
+import BunnyCard from "./BunnyCard";
+import Alert from "./Alert";
+import NavBar from "./NavBar";
 export { BunnyForm, BunnyCard, BunniesContainer,Login, AppForm, Alert, NavBar }
