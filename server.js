@@ -53,7 +53,7 @@ const __dirname = path.dirname(__filename);
 	
 
 	app.get('/', () => {
-		res.send(<h1>Hello!</h1>);
+		res.send('Hello!');
 	})
 
   
