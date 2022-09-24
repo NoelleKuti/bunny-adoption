@@ -12,7 +12,7 @@ const App = () => {
 		<AppStyles>
             <NavBar />
 			<Routes>
-                <Route index path="/" element={<BunniesContainer isAdmin={false}/>} />
+                <Route path="/" element={<BunniesContainer isAdmin={false}/>} />
 
 				<Route path="login" 
                     element={<Login/>}
