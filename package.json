@@ -1,7 +1,7 @@
 {
-  "name": "codingchallenge",
+  "name": "bunny-adoption",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "install-server": "npm install",

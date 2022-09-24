@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
 
 app.get(cors(corsConfig));
 
+/*
 //serve from index.html '\'
 const port = process.env.PORT || 5000;
 
@@ -42,6 +43,7 @@ if (process.env.NODE_ENV == "production") {
 	  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 	});
   }
+  */
 
   //add routes
 app.use('/api/v1/bunnies', bunniesRoutes);
