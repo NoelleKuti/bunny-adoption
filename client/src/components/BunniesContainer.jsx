@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useAppContext } from '../context/appContext'
-import BunnyCard from './BunnyCard'
-import BunnyForm from './BunnyForm/BunnyForm'
+import { useAppContext } from '../context/appContext.js'
+import BunnyCard from './BunnyCard.js'
+import BunnyForm from './BunnyForm/BunnyForm.js'
 
 const BunniesContainer = () => {
     const { fetchBunnies, bunniesData, showForm, toggleShowForm, checkAuth, isLoggedIn } = useAppContext();   

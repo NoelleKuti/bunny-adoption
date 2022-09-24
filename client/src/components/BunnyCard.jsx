@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useAppContext } from '../context/appContext';
+import { useAppContext } from '../context/appContext.js';
 import { MdDeleteOutline, MdOutlineModeEdit } from 'react-icons/md'
 
 
