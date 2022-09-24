@@ -97,7 +97,7 @@ const AppProvider = ({ children }) => {
     }
 
     const fetchBunnies = () => {
-        axios.get('http://localhost:5000/api/v1/bunnies', { crossdomain: true })
+        axios.get('/api/v1/bunnies', { crossdomain: true })
             .then((response) => {
                 dispatch({
                     type: VIEW_BUNNIES,
@@ -110,7 +110,7 @@ const AppProvider = ({ children }) => {
     }
 
     const addBunny = (formData) => {
-        axios.post('http://localhost:5000/api/v1/bunnies', {...formData})
+        axios.post('/api/v1/bunnies', {...formData})
             .then((response) => {
                 console.log(response.data);
             })
@@ -120,7 +120,7 @@ const AppProvider = ({ children }) => {
     }
 
     const deleteBunny = (objectId) => {
-        axios.delete('http://localhost:5000/api/v1/bunnies/' + objectId)
+        axios.delete('/api/v1/bunnies/' + objectId)
             .then(() => {
                 fetchBunnies();
             })
@@ -134,7 +134,7 @@ const AppProvider = ({ children }) => {
     const editBunny = (id, data) => {
         
         console.log(id, data);
-        axios.patch(`http://localhost:5000/api/v1/bunnies/${id}`, data)
+        axios.patch(`/api/v1/bunnies/${id}`, data)
             .then((response) => {
                 dispatch({type: TOGGLE_EDIT_FORM})
 				fetchBunnies();
@@ -163,7 +163,7 @@ const AppProvider = ({ children }) => {
         e.preventDefault();
         const {userName, password} = data;
 
-        axios.post('http://localhost:5000/api/v1/auth/login', {userName, password})
+        axios.post('/api/v1/auth/login', {userName, password})
             .then((res) => {
                 console.log(res.data.message);
                 if (res.data.success === true) {
@@ -191,7 +191,7 @@ const AppProvider = ({ children }) => {
     }
 
     const getKey = () => {
-        return axios.get('http://localhost:5000/api/v1/auth/check')
+        return axios.get('/api/v1/auth/check')
     } 
 
     const checkAuth = async (key) => {
