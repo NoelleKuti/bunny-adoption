@@ -116,6 +116,7 @@ const AppProvider = ({ children }) => {
             })
             .then(() => {
                 dispatch({type: TOGGLE_ADD_FORM})
+				fetchBunnies();
             })
     }
 
