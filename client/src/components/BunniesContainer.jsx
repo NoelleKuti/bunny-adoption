@@ -32,7 +32,7 @@ const BunniesContainer = () => {
 				</div>
 				<div className='row container'>
 				{bunniesData && bunniesData.map((item) => {
-					console.log(item);
+					//console.log(item);
 					return (
 						<BunnyCard 
 							key={'k'+item._id} 
