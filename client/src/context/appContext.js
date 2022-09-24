@@ -112,9 +112,11 @@ const AppProvider = ({ children }) => {
 
     const addBunny = (formData) => {
         axios.post('/api/v1/bunnies', {...formData})
-            .then((response) => {
+            /*
+			.then((response) => {
                 console.log(response.data);
             })
+			*/
             .then(() => {
                 dispatch({type: TOGGLE_ADD_FORM})
             })
@@ -134,7 +136,7 @@ const AppProvider = ({ children }) => {
 
     const editBunny = (id, data) => {
         
-        console.log(id, data);
+        //console.log(id, data);
         axios.patch(`/api/v1/bunnies/${id}`, data)
             .then((response) => {
                 dispatch({type: TOGGLE_EDIT_FORM})
@@ -149,7 +151,7 @@ const AppProvider = ({ children }) => {
 
     const toggleShowAlert = (data) => {
         const {alertType, alertText} = data;
-        console.log(alertType, alertText);
+        //console.log(alertType, alertText);
         dispatch({ 
             type: TOGGLE_SHOW_ALERT,
             payload: {
@@ -165,7 +167,7 @@ const AppProvider = ({ children }) => {
 
         axios.post('/api/v1/auth/login', {userName, password})
             .then((res) => {
-                console.log(res.data.message);
+                //console.log(res.data.message);
                 if (res.data.success === true) {
                     toggleShowAlert({alertType: 'success', alertText: res.data.message});
                     
