@@ -8,7 +8,7 @@ const BunnyCard = (props) => {
     const { objectId, bunnyData } = props;
     const { bunnyName, description, temperament, age, variation, imageLink } = bunnyData;
  
-    const { deleteBunny, chooseBunnyToEdit, authKey, checkAuth, isLoggedIn } = useAppContext();
+    const { deleteBunny, chooseBunnyToEdit, checkAuth, isLoggedIn } = useAppContext();
 
 
 	let initial = false;
