@@ -25,7 +25,10 @@ let bunnySchema = new Schema(
         },
         imageLink: {
             type: String,
-        }
+        },
+		linkTo: {
+			type: String,
+		}
     },
 );
 

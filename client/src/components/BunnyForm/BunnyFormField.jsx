@@ -4,7 +4,7 @@ import { useAppContext } from '../../context/appContext.js'
 
 const FormFieldText = () => {
     const { handleTextInput, bunnyToEdit } = useAppContext();
-    const { bunnyName, description, temperament, age, variation, imageLink } = bunnyToEdit;
+    const { bunnyName, description, temperament, age, variation, imageLink, linkTo } = bunnyToEdit;
     
     return (
       <TextFieldStyles>
@@ -89,6 +89,19 @@ const FormFieldText = () => {
                 placeholder="Link To Image Of Bunny"
                 onChange={(e) => { handleTextInput({e:e, formName:'bunny'}) }} 
                 defaultValue={imageLink}
+            />
+        </div>
+		<div className='column formField'>
+            <label htmlFor='imgLink'>
+                URL to redirect to when potential adopter clicks bunny image:
+            </label>
+            <input 
+                className='textInput'
+                type='text'
+                name='linkTo'
+                placeholder="URL to redirect to on image click"
+                onChange={(e) => { handleTextInput({e:e, formName:'bunny'}) }} 
+                defaultValue={linkTo ? linkTo : ''}
             />
         </div>
     </TextFieldStyles>

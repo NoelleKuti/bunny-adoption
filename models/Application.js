@@ -23,12 +23,16 @@ const ApplicationSchema = new Schema(
         agreeToCare: {
             describeHousing: String,
             indoorHousing: Boolean,
-            sufficientSpace: Boolean,
+            timeOutOfEnclosure: String,
+			sufficientSpace: Boolean,
+			planForEnrichment: String,
             outdoorTime: {
                 agree: Boolean,
                 describe: String,
             },
             correctDiet: Boolean,
+			chewingOpportunities: Boolean,
+			litterBoxProgram: Boolean,
             financiallyAble: Boolean,
             informedMedical: Boolean,
             respectBoundaries: Boolean,
@@ -41,6 +45,7 @@ const ApplicationSchema = new Schema(
             preventPregnancy: Boolean,
             willReachOut: Boolean,
         },
+		donationAmount: Number,
     },
     {collection: 'Applications'},
 )

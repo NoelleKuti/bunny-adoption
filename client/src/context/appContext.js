@@ -3,6 +3,7 @@ import reducer from './appReducer.js';
 import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN } from './appActions.js';
 import axios from 'axios'
 
+const urlHead = 'http://localhost:5000'
 const initialState = {
     showForm: false,
     formType: '',
@@ -13,6 +14,7 @@ const initialState = {
         age: '',
         variation: '',
         imageLink: '',
+		linkTo: '',
     },
     showAlert: false,
     alertText: '',
@@ -38,10 +40,12 @@ const initialState = {
             indoorHousing: false,
             sufficientSpace: false,
             outdoorTime: {
-                agree: false,
-                describe: '',
+                otAgree: false,
+                otDescribe: '',
             },
             correctDiet: false,
+			chewingOpportunities: false,
+			litterBoxProgram: false,
             financiallyAble: false,
             informedMedical: false,
             respectBoundaries: false,
@@ -98,7 +102,7 @@ const AppProvider = ({ children }) => {
     }
 
     const fetchBunnies = () => {
-        axios.get('/api/v1/bunnies', { crossdomain: true })
+        axios.get(`${urlHead}/api/v1/bunnies`, { crossdomain: true })
             .then((response) => {
                 dispatch({
                     type: VIEW_BUNNIES,
@@ -111,7 +115,7 @@ const AppProvider = ({ children }) => {
     }
 
     const addBunny = (formData) => {
-        axios.post('/api/v1/bunnies', {...formData})
+        axios.post(`${urlHead}/api/v1/bunnies`, {...formData})
             /*
 			.then((response) => {
                 console.log(response.data);
@@ -123,7 +127,7 @@ const AppProvider = ({ children }) => {
     }
 
     const deleteBunny = (objectId) => {
-        axios.delete('/api/v1/bunnies/' + objectId)
+        axios.delete(`${urlHead}/api/v1/bunnies/ ${objectId}`)
             .then(() => {
                 fetchBunnies();
             })
@@ -137,7 +141,7 @@ const AppProvider = ({ children }) => {
     const editBunny = (id, data) => {
         
         //console.log(id, data);
-        axios.patch(`/api/v1/bunnies/${id}`, data)
+        axios.patch(`${urlHead}/api/v1/bunnies/${id}`, data)
             .then((response) => {
                 dispatch({type: TOGGLE_EDIT_FORM})
             })
@@ -165,7 +169,7 @@ const AppProvider = ({ children }) => {
         e.preventDefault();
         const {userName, password} = data;
 
-        axios.post('/api/v1/auth/login', {userName, password})
+        axios.post(`${urlHead}/api/v1/auth/login`, {userName, password})
             .then((res) => {
                 //console.log(res.data.message);
                 if (res.data.success === true) {
@@ -193,7 +197,7 @@ const AppProvider = ({ children }) => {
     }
 
     const getKey = () => {
-        return axios.get('/api/v1/auth/check')
+        return axios.get(`${urlHead}/api/v1/auth/check`);
     } 
 
     const checkAuth = async (key) => {

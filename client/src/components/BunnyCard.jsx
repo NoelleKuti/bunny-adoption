@@ -6,7 +6,7 @@ import { MdDeleteOutline, MdOutlineModeEdit } from 'react-icons/md'
 
 const BunnyCard = (props) => {
     const { objectId, bunnyData } = props;
-    const { bunnyName, description, temperament, age, variation, imageLink } = bunnyData;
+    const { bunnyName, description, temperament, age, variation, imageLink, linkTo } = bunnyData;
  
     const { deleteBunny, chooseBunnyToEdit, checkAuth, isLoggedIn } = useAppContext();
 
@@ -38,21 +38,23 @@ const BunnyCard = (props) => {
                         </div>
                     }           
                 </div>
-				<img src={imageLink} alt={`no pics to show of ${bunnyName}`} className='bunImage'/>
-                <div className='cardText'>
-                    <p>
-                        Description: {description}
-                    </p>
-                    <p>
-                        Temperament: {temperament}
-                    </p>
-                    <p>
-                        Age: {age} 
-                    </p>
-                    <p>
-                        Variation: {variation}
-                    </p>
-                </div>
+				<a href={linkTo}>
+					<img src={imageLink} alt={`no pics to show of ${bunnyName}`} className='bunImage'/>
+					<div className='cardText'>
+						<p>
+							Description: {description}
+						</p>
+						<p>
+							Temperament: {temperament}
+						</p>
+						<p>
+							Age: {age} 
+						</p>
+						<p>
+							Variation: {variation}
+						</p>
+					</div>
+				</a>
 				<button 
 					className='switchViewBtn button' 	type='button' 
 					onClick={() => {
