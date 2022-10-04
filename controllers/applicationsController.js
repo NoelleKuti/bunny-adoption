@@ -1,7 +1,7 @@
 import Application from "../models/Application.js";
 
 const submitApplication = async (req, res) => {
-    await Bunny.create(req.body);
+    await Application.create(req.body);
     await res.send('Application Successfully Submitted');
 }
 

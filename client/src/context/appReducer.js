@@ -1,4 +1,4 @@
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN } from "./appActions.js";
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_BOOL_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN, VIEW_APPLICATIONS } from "./appActions.js";
 import { initialState } from "./appContext.js";
 
 const reducer = (state, action) => {
@@ -24,7 +24,8 @@ const reducer = (state, action) => {
                 isLoggedIn: state.isLoggedIn,
             }
         case HANDLE_TEXT_INPUT:
-            let {e, formName} = action.payload;
+            let {e, formName, groups} = action.payload;
+
             switch (formName) {
                 case 'bunny':
                     return {
@@ -43,20 +44,68 @@ const reducer = (state, action) => {
                         }
                     }
                 case 'adoptForm':
-                    console.log('still under construction!');
+                    let groupName = groups[0];
+					let subGroupName = groups[1];
+					
+					if (groups.length === 1) {
+						if (groupName === '') {
+							return {
+								...state,
+								adoptForm : {
+									...state.adoptForm,
+									[e.target.name]: e.target.value
+								}
+							}
+						} else {
+							return {
+								...state,
+								adoptForm: {
+									...state.adoptForm,
+									[groupName] : {
+										...state.adoptForm[groupName],
+										[e.target.name]: e.target.value
+									}
+								}
+							}
+						}
+					} else if (groups.length === 2) {
+						return {
+							...state,
+							adoptForm: {
+								...state.adoptForm,
+								[groupName]: {
+									...state.adoptForm[groupName],
+									[subGroupName]: {
+										...state.adoptForm[groupName][subGroupName],
+										[e.target.name]: e.target.value
+									}
+								}
+							}
+						}
+					} else {
+						console.log('There was an error with the appForm reducer ):');
+					}
 					break;
-                default: 
-					console.log('something went wrong in appReducer.js');    
+				default:
+					console.log('there was an error with the reducer');
+				
+			}
+			break;
+		case HANDLE_BOOL_CHANGE:
+			return {
+				...state,
+				appForm: {
+					...state.appForm,
+					[action.payload.name]: action.payload.value
 				}
-				break;
-	
+			}
         case VIEW_BUNNIES:
             return {
                 ...state,
                 bunniesData: action.payload,
             }
         case CHOOSE_BUNNY_TO_EDIT:
-            const { bunnyName, description, temperament, age, variation, imageLink } = action.payload;
+            const { bunnyName, description, temperament, age, variation, imageLink, linkTo } = action.payload;
             return {
                 ...state,
                 form: {
@@ -65,7 +114,8 @@ const reducer = (state, action) => {
                     temperament : temperament,
                     age : age,
                     variation : variation,
-                    imageLink : imageLink
+                    imageLink : imageLink,
+					linkTo : linkTo,
                 },
                 bunnyToEdit: {...action.payload},
             }
@@ -105,6 +155,12 @@ const reducer = (state, action) => {
                 },
 				isLoggedIn: false,
             }
+		case VIEW_APPLICATIONS:
+			return {
+				...state,
+				applications: action.payload
+			}
+
         default: console.log('something went wrong in appReducer.js')
     }
 }

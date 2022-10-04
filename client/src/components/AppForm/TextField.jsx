@@ -1,9 +1,11 @@
 import React from 'react'
+import { useAppContext } from '../../context/appContext';
 
 const TextField = (props) => {
-  const {type, fieldName, helperText, placeHolder, label} = props;
-
+ 	const { type, fieldName, helperText, placeHolder, label, groups } = props;
+	const { handleTextInput } = useAppContext();
   
+
     return (
     <div className='formField column'>
 		<div className='fieldHeaders'>
@@ -23,6 +25,7 @@ const TextField = (props) => {
 				name={fieldName}
 				helpertext={helperText}
 				placeholder={placeHolder}
+				onChange={(e) => handleTextInput({e: e, formName: 'adoptForm', groups: groups})}
 			/>
 	}
 	{
@@ -33,6 +36,7 @@ const TextField = (props) => {
 			name={fieldName}
 			helpertext={helperText}
 			placeholder={placeHolder}
+			onChange={(e) => handleTextInput({e: e, formName: 'adoptForm', groups: groups})}
 			cols='10' rows='10'
 		/>
 	}

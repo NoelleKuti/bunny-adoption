@@ -1,7 +1,9 @@
 import React from 'react'
+import { useAppContext } from '../../context/appContext';
 
 const BoolField = (props) => {
-  const { fieldName, helperText, label } = props;
+  const { fieldName, helperText, label, groups } = props;
+  const { handleTextInput } = useAppContext();
 	
 	return (
 	<div className='column formField'>
@@ -18,14 +20,16 @@ const BoolField = (props) => {
 					name={fieldName} 
 					value={true}
 					type='radio'
+					onChange={(e) => handleTextInput({e: e, formName:'adoptForm', groups: groups})}
 				/>
 			</div>
 			<div className='row'>
 				<p>No</p>
 				<input 
 					name={fieldName} 
-					value={true}
+					value={false}
 					type='radio'
+					onChange={(e) => handleTextInput({e: e, formName:'adoptForm', groups: groups})}
 				/>
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import reducer from './appReducer.js';
-import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_AGE_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN } from './appActions.js';
+import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_BOOL_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN, VIEW_APPLICATIONS } from './appActions.js';
 import axios from 'axios'
 
 const urlHead = 'http://localhost:5000'
@@ -65,6 +65,7 @@ const initialState = {
     },
     authKey: '',
 	isLoggedIn: false,
+	applications: [],
 }
 
 const AppContext = createContext(initialState);
@@ -89,14 +90,15 @@ const AppProvider = ({ children }) => {
             type: HANDLE_TEXT_INPUT,
             payload: {
                 e: data.e,
-                formName: data.formName
+                formName: data.formName,
+				groups: data.groups
             }
         })
     }
 
-    const handleAgeChange = (data) => {
+    const handleBoolChange = (data) => {
         dispatch({
-            type: HANDLE_AGE_CHANGE,
+            type: HANDLE_BOOL_CHANGE,
             payload: data
         })
     }
@@ -113,6 +115,19 @@ const AppProvider = ({ children }) => {
 				console.log(err);
 			})
     }
+
+	const fetchApplications = () => {
+		axios.get(`${urlHead}/api/v1/applications/`, { crossdomain: true })
+			.then((response) => {
+				dispatch({
+					type: VIEW_APPLICATIONS,
+					payload: response.data
+				})
+			})
+			.catch((error) => {
+				console.log(error)
+			});
+	}
 
     const addBunny = (formData) => {
         axios.post(`${urlHead}/api/v1/bunnies`, {...formData})
@@ -220,7 +235,14 @@ const AppProvider = ({ children }) => {
 		}
 	}
 
-	
+	const submitApplication = (formData) => {
+		axios.post(`${urlHead}/api/v1/applications/`, formData)
+			.then((response) => {
+				console.log(response.data);
+			})
+
+
+	}
     
     
 
@@ -231,7 +253,7 @@ const AppProvider = ({ children }) => {
                 toggleShowForm,
                 clearForms,
                 handleTextInput,
-                handleAgeChange,
+                handleBoolChange,
                 fetchBunnies,
                 deleteBunny,
                 addBunny,
@@ -242,7 +264,9 @@ const AppProvider = ({ children }) => {
                 handleLogin,
                 handleLogout,
                 getKey,
-                checkAuth
+                checkAuth,
+				fetchApplications,
+				submitApplication,
             }}>
             {children}
         </AppContext.Provider>
