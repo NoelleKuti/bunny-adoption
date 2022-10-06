@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/appContext.js'
 
 
 const NavBar = () => {
     const { handleLogout, isLoggedIn } = useAppContext();
-    
-
-   
-
 
     return (
         <div className='navbar'>

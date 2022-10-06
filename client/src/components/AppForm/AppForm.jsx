@@ -1,16 +1,37 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import TextField from './TextField'
 import BoolField from './BoolField.jsx'
+import Alert from '../Alert'
 import { useAppContext } from '../../context/appContext'
+import { useNavigate } from 'react-router-dom'
 
 const AppForm = () => {
 	
-	const { submitApplication, adoptForm } = useAppContext();
+	const { submitApplication, adoptForm, toggleShowAlert, clearAlert } = useAppContext();
 	const [formSent, setFormSent] = useState(false);
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		submitApplication(adoptForm)
+		setFormSent(true);
+		toggleShowAlert({alertType: 'success', alertText: 'Application Successfully Submitted! Redirecting...'})
+	}
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (formSent === true) {
+			setTimeout(() => {
+				navigate('/')
+			}, 3000);
+		}
+		clearAlert();
+	}, []);
+
 	return (
+		
 		<>
-		<form className='appForm' onSubmit={submitApplication(adoptForm)}>
+		<form className='appForm'>
 			<h1 className='formHeader'> Application Form </h1>
 			<div className='group' id='aboutYou'>
 				<h2 className='groupLabel'>
@@ -237,8 +258,10 @@ const AppForm = () => {
 					groups={['agreeToContact']}
 				/>
 			</div>
+			<Alert />
+			<button type='button' disabled={formSent} onClick={(e) => handleSubmit(e)}>SUBMIT</button>
 		</form>
-  		<button type='submit'>SUBMIT</button>
+  		
 	</>
   )
 }

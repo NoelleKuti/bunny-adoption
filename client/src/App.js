@@ -1,13 +1,16 @@
 import {React} from 'react'
 import {Routes, Route } from 'react-router-dom'
 import styled from 'styled-components'
-import { BunniesContainer, Login, AppForm, NavBar } from './components/index.js'
-import './index.css'
+import { BunniesContainer, Login, AppForm, NavBar, Dashboard } from './components/index.js'
+import { useAppContext } from './context/appContext.js'
 
+import './index.css'
 
 
 const App = () => {
     
+	const { isLoggedIn } = useAppContext();
+
     return (
 		<AppStyles>
             <NavBar />
@@ -18,7 +21,7 @@ const App = () => {
                     element={<Login/>}
                 />
                     
-				<Route path="apply" element={<AppForm />} />
+				<Route path="apply" element={isLoggedIn ? <Dashboard /> : <AppForm />} />
                 
 			</Routes>
 		</AppStyles>

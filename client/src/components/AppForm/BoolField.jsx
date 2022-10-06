@@ -29,6 +29,7 @@ const BoolField = (props) => {
 					name={fieldName} 
 					value={false}
 					type='radio'
+					defaultChecked={true}
 					onChange={(e) => handleTextInput({e: e, formName:'adoptForm', groups: groups})}
 				/>
 			</div>

@@ -5,4 +5,8 @@ import AppForm from "./AppForm/AppForm";
 import BunnyCard from "./BunnyCard";
 import Alert from "./Alert";
 import NavBar from "./NavBar";
-export { BunnyForm, BunnyCard, BunniesContainer,Login, AppForm, Alert, NavBar }
+import Dashboard from "./Dashboard/Dashboard";
+
+
+
+export { BunnyForm, BunnyCard, BunniesContainer,Login, AppForm, Alert, NavBar, Dashboard }

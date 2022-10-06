@@ -5,7 +5,7 @@ const TextField = (props) => {
  	const { type, fieldName, helperText, placeHolder, label, groups } = props;
 	const { handleTextInput } = useAppContext();
   
-
+	
     return (
     <div className='formField column'>
 		<div className='fieldHeaders'>
