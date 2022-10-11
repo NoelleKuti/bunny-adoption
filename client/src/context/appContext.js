@@ -131,6 +131,7 @@ const AppProvider = ({ children }) => {
 	}
 
 	const deleteApplication = (objectID) => {
+		console.log('look here! ', objectID);
 		axios.delete(`${urlHead}/api/v1/applications/${objectID}`)
 		.then(() => {
 			console.log('item successfully deleted');

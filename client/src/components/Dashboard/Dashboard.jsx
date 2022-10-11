@@ -3,7 +3,7 @@ import { useAppContext } from '../../context/appContext'
 import Application from './Application';
 
 const Dashboard = () => {
-	const { fetchApplications, applications, checkAuth, deleteApplication } = useAppContext();
+	const { fetchApplications, applications, checkAuth } = useAppContext();
 
 	useEffect(() => {
 		fetchApplications();
@@ -17,16 +17,18 @@ const Dashboard = () => {
 		{
 			applications.map((item) => {
 				return (
-					<>
-						<Application data={item} key={`key_${item._id}`}/>
+					<div className='margin-top application' key={`divKey${item._id}`}>
+						<h2 className='formHeader' key={`headerKey${item._id}`}>
+							{ `${applications.indexOf(item)} : ${item.aboutYou.email}` }
+						</h2>
+						<Application data={item} itemId={item._id} key={`key_${item._id}`}/>
 						
-						<button key={`button_${item._id}`} onClick={() => deleteApplication(item._id)}>
-							delete
-						</button>
-					</>
+					</div>
 				);
 			})
 		}
+
+		<p> That's the end of the applications! </p>
 
 		</div>
   )

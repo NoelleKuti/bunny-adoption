@@ -24,9 +24,10 @@ const AppForm = () => {
 			setTimeout(() => {
 				navigate('/')
 			}, 3000);
+			console.log('useEffect activated!')
 		}
 		clearAlert();
-	}, []);
+	}, [formSent]);
 
 	return (
 		
