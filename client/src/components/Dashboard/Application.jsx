@@ -26,8 +26,8 @@ const Application = (data) => {
 				<p className='fieldValue'>
 					{ data.data.desiredBunnyName }
 				</p>
-			
-			
+		</div>	
+		<div>	
 			{
 				aboutYouData.map((field) => 
 				{
@@ -161,7 +161,7 @@ const StyleWrapper = styled.div `
 	}
 
 	.infoBox {
-		max-height: ${props => (props.expand ? 'fit-content' : '200px')};
+		max-height: ${props => (props.expand ? 'fit-content' : '300px')};
 		overflow-y: ${props => (props.expand ? 'visible' : 'scroll')};
 		overflow-x: hidden;
 		margin: 25px auto;

@@ -18,8 +18,16 @@ const NavBar = () => {
 						login
 					</Link>
 				}
-				<Link className='navLink' to='/apply'>{isLoggedIn ? 'view applications' : 'apply to adopt'}</Link>
-				<Link className='navLink' to='/'>
+				<Link 
+					className='navLink' 
+					to={isLoggedIn ? '/admin-dashboard' : '/apply'}>
+					
+						{isLoggedIn ? 'view applications' : 'apply to adopt'}
+				</Link>
+				<Link 
+					className='navLink' 
+					to='/'
+				>
 					home
 				</Link>
 			</div>

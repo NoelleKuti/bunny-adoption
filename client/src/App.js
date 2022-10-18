@@ -8,8 +8,6 @@ import './index.css'
 
 
 const App = () => {
-    
-	const { isLoggedIn } = useAppContext();
 
     return (
 		<AppStyles>
@@ -21,7 +19,9 @@ const App = () => {
                     element={<Login/>}
                 />
                     
-				<Route path="apply" element={isLoggedIn ? <Dashboard /> : <AppForm />} />
+				<Route path="apply" element={<AppForm />} />
+
+				<Route path="admin-dashboard" element={<Dashboard />} />
                 
 			</Routes>
 		</AppStyles>
