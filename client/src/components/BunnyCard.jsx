@@ -74,7 +74,6 @@ const CardStyles = styled.div`
         border: 1px solid black;
         border-radius: 20px;
         background-color: var(--50);
-        height: 600px;
         justify-content: space-between;
 		align-items: center;
 		position: relative;
