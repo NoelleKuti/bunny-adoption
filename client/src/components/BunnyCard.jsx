@@ -69,7 +69,10 @@ const BunnyCard = (props) => {
 }
 
 const CardStyles = styled.div`
-    .card {
+    height: fit-content;
+	margin: 15px 15px;
+	
+	.card {
 		width: 400px;
         border: 1px solid black;
         border-radius: 20px;
@@ -79,12 +82,12 @@ const CardStyles = styled.div`
 		position: relative;
 
 		.bunImage {
-		max-width: 100%;
+		width: 100%;
 		margin: 0px auto;
 		align-content: center;
 		color: #a1a1a1;
 		border: 2px solid green;
-		position: absolute;
+	
 		left: 0;
 		right: 0;
 		top: 8rem;
@@ -110,7 +113,6 @@ const CardStyles = styled.div`
     }
     .cardText {
         padding: 1rem;
-		position: absolute;
 		top: 8rem;
 		display: ${props => (props.viewText ? 'initial' : 'none')}
     }
