@@ -56,8 +56,8 @@ const Application = (data) => {
 					} else {
 						return (
 							<div className='field row' key={`key_${field[0]}`}>
-								<h3 className='fieldName'>{field[0]}</h3>
-								<p className='fieldValue'>{field[1].toString()}</p>
+								<h3 className='fieldName' key={`h3_${field[0]}`}>{field[0]}</h3>
+								<p className='fieldValue' key={`p_${field[0]}`}>{field[1].toString()}</p>
 							</div>
 						)
 					}
@@ -74,8 +74,8 @@ const Application = (data) => {
 				agreeToCareData.map((field) => {
 					return (
 						<div className='field row' key={`key_${field[0]}`}>
-							<h3 className='fieldName'>{field[0]}</h3>
-							<p className='fieldValue'>{field[1].toString()}</p>
+							<h3 className='fieldName' key={`h3_${field[0]}`}>{field[0]}</h3>
+							<p className='fieldValue' key={`p_${field[0]}`}>{field[1].toString()}</p>
 						</div>
 					)
 				})
@@ -92,10 +92,10 @@ const Application = (data) => {
 				{
 					return (
 						<div className='field row' key={`key_${field[0]}`}>
-							<h3 className='fieldName'>
+							<h3 className='fieldName' key={`h3_${field[0]}`}>
 								{field[0]}
 							</h3>
-							<p className='fieldValue'>
+							<p className='fieldValue' key={`p_${field[0]}`}>
 								{field[1].toString()}
 							</p>
 						</div>
