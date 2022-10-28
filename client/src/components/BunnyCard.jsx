@@ -82,17 +82,17 @@ const CardStyles = styled.div`
 		position: relative;
 
 		.bunImage {
-		width: 100%;
-		margin: 0px auto;
-		align-content: center;
-		color: #a1a1a1;
-		border: 2px solid green;
-	
-		left: 0;
-		right: 0;
-		top: 8rem;
-		display: ${props => (props.viewText ? 'none' : 'initial')};
-	}
+			width: 100%;
+			margin: 0px auto;
+			align-content: center;
+			color: #a1a1a1;
+			border: 2px solid green;
+		
+			left: 0;
+			right: 0;
+			top: 8rem;
+			display: ${props => (props.viewText ? 'none' : 'initial')};
+		}
     }
     .cardHeader {
 		width: 100%;
@@ -111,25 +111,27 @@ const CardStyles = styled.div`
 		   flex-wrap: no wrap;
         }
     }
+
     .cardText {
         padding: 1rem;
 		top: 8rem;
+		text-decoration: none;
+		color: black;
 		display: ${props => (props.viewText ? 'initial' : 'none')}
     }
+
     .cardBtn {
         width: 3rem;
         height: 3rem;
         padding: 1rem;
-		font-size: 25px;
         border: none;
-        margin: 5px 5px 5px 5px;
         border-radius: 50%;
         background-color:var(--300);
-        color: white;
+        color: black;
         align-content: center;
         cursor: pointer;
         :hover {
-            background-color:var(--400);
+            color: cornflowerblue;
         }
     }
 
@@ -137,11 +139,20 @@ const CardStyles = styled.div`
 		background-color: none;
 		border: none;
 		box-shadow: none;
-		padding: 2rem;
+		padding: 1rem;
+		width: 90%;
 		margin: 1rem;
 	}
 
-	
+	@media screen and (max-width: 500px) {
+		.card {
+			width: 90%;
+			justify-content: center;
+		}
+
+
+
+	}
 
 
 `

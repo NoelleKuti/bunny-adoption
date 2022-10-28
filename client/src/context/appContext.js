@@ -3,8 +3,8 @@ import reducer from './appReducer.js';
 import { TOGGLE_ADD_FORM, TOGGLE_EDIT_FORM, CLEAR_FORMS, HANDLE_TEXT_INPUT, HANDLE_BOOL_CHANGE, VIEW_BUNNIES, CHOOSE_BUNNY_TO_EDIT, TOGGLE_SHOW_ALERT, CLEAR_ALERT, LOGIN_ADMIN, LOGOUT_ADMIN, VIEW_APPLICATIONS } from './appActions.js';
 import axios from 'axios'
 
-//const urlHead = 'http://localhost:5000'
-const urlHead = '';
+const urlHead = 'http://localhost:5000'
+//const urlHead = '';
 const initialState = {
     showForm: false,
     formType: '',
@@ -131,7 +131,6 @@ const AppProvider = ({ children }) => {
 	}
 
 	const deleteApplication = (objectID) => {
-		console.log('look here! ', objectID);
 		axios.delete(`${urlHead}/api/v1/applications/${objectID}`)
 		.then(() => {
 			console.log('item successfully deleted');
@@ -169,10 +168,8 @@ const AppProvider = ({ children }) => {
     }
 
     const editBunny = (id, data) => {
-        
-        //console.log(id, data);
         axios.patch(`${urlHead}/api/v1/bunnies/${id}`, data)
-            .then((response) => {
+            .then(() => {
                 dispatch({type: TOGGLE_EDIT_FORM})
             })
 			.then(() => {
@@ -191,7 +188,7 @@ const AppProvider = ({ children }) => {
 
     const toggleShowAlert = (data) => {
         const {alertType, alertText} = data;
-        //console.log(alertType, alertText);
+		
         dispatch({ 
             type: TOGGLE_SHOW_ALERT,
             payload: {

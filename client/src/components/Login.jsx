@@ -3,8 +3,6 @@ import { useAppContext } from '../context/appContext.js'
 import Alert from './Alert'
 import { useNavigate } from 'react-router-dom'
 
-
-
 const Login = () => {
 
     const { handleTextInput, login, handleLogin, isLoggedIn } = useAppContext();
@@ -17,7 +15,6 @@ const Login = () => {
         handleLogin(e, {userName, password});
     }
 
-    
     useEffect(() => {
         if (isLoggedIn) {
             setTimeout(() => {
@@ -26,12 +23,11 @@ const Login = () => {
         }
     }, [isLoggedIn, navigate]);
     
-
     return (
         <form id='login' name='loginForm' className='column' onSubmit={onSubmitForm}>
             {<Alert />}
 				<div className='column loginCol'>
-					<p>UserName:</p>
+					<p className='formLabel'>User Name:</p>
 					<input 
 						type= 'text'
 						name='userName'
@@ -40,7 +36,7 @@ const Login = () => {
 					/>
 				</div> 
 				<div className='column loginCol'>
-					<p>Password:</p><input
+					<p className='formLabel'>Password:</p><input
 						type='password'
 						name='password'
 						defaultValue = {password}
@@ -51,9 +47,7 @@ const Login = () => {
           
         </form>
 
-
-
-    )
+    );
 
 
 }
