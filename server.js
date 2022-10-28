@@ -34,6 +34,11 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
+//experiment for refresh problem 
+app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy',"default-src 'self' 'unsafe-inline'");
+    next();
+});
 
 app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
