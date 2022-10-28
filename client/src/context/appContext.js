@@ -173,6 +173,7 @@ const AppProvider = ({ children }) => {
                 dispatch({type: TOGGLE_EDIT_FORM})
             })
 			.then(() => {
+				//dispatch success alert
 				console.log('bunny successfully edited');
 			})
 			.catch((error) => {
@@ -188,7 +189,7 @@ const AppProvider = ({ children }) => {
 
     const toggleShowAlert = (data) => {
         const {alertType, alertText} = data;
-		
+
         dispatch({ 
             type: TOGGLE_SHOW_ALERT,
             payload: {
