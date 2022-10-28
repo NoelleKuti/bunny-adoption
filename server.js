@@ -7,9 +7,6 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 dotenv.config();
 
 const corsConfig = {
@@ -37,9 +34,11 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
+/*
 app.get('*', (request, response) => {
 	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
+*/
 
 
   //add routes
