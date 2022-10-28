@@ -175,6 +175,12 @@ const AppProvider = ({ children }) => {
             .then((response) => {
                 dispatch({type: TOGGLE_EDIT_FORM})
             })
+			.then(() => {
+				console.log('bunny successfully edited');
+			})
+			.catch((error) => {
+				console.log(error);
+			})
     }
 
     const clearAlert = () => {
